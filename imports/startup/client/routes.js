@@ -5,10 +5,15 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import App from '../../ui/layouts/App.js';
-import Documents from '../../ui/pages/Documents.js';
-import NewDocument from '../../ui/pages/NewDocument.js';
-import EditDocument from '../../ui/containers/EditDocument.js';
-import ViewDocument from '../../ui/containers/ViewDocument.js';
+import Teams from '../../ui/pages/Teams.js';
+import Versions from '../../ui/pages/Versions.js';
+import Developers from '../../ui/pages/Developers.js';
+import NewTeam from '../../ui/pages/NewTeam.js';
+import EditTeam from '../../ui/containers/EditTeam.js';
+import NewVersion from '../../ui/pages/NewVersion.js';
+import EditVersion from '../../ui/containers/EditVersion.js';
+import NewDeveloper from '../../ui/pages/NewDeveloper.js';
+import EditDeveloper from '../../ui/containers/EditDeveloper.js';
 import Index from '../../ui/pages/Index.js';
 import Login from '../../ui/pages/Login.js';
 import NotFound from '../../ui/pages/NotFound.js';
@@ -30,10 +35,15 @@ Meteor.startup(() => {
     <Router history={ browserHistory }>
       <Route path="/" component={ App }>
         <IndexRoute name="index" component={ Index } />
-        <Route name="documents" path="/documents" component={ Documents } onEnter={ authenticate } />
-        <Route name="newDocument" path="/documents/new" component={ NewDocument } onEnter={ authenticate } />
-        <Route name="editDocument" path="/documents/:_id/edit" component={ EditDocument } onEnter={ authenticate } />
-        <Route name="viewDocument" path="/documents/:_id" component={ ViewDocument } onEnter={ authenticate } />
+        <Route name="teams" path="/teams" component={ Teams } onEnter={ authenticate } />
+        <Route name="versions" path="/versions" component={ Versions } onEnter={ authenticate } />
+        <Route name="developers" path="/developers" component={ Developers } onEnter={ authenticate } />
+        <Route name="newTeam" path="/teams/new" component={ NewTeam } onEnter={ authenticate } />
+        <Route name="newVersion" path="/versions/new" component={ NewVersion } onEnter={ authenticate } />
+        <Route name="newDeveloper" path="/developers/new" component={ NewDeveloper } onEnter={ authenticate } />
+        <Route name="editTeam" path="/teams/:_id/edit" component={ EditTeam } onEnter={ authenticate } />
+        <Route name="editVersion" path="/versions/:_id/edit" component={ EditVersion } onEnter={ authenticate } />
+        <Route name="editDeveloper" path="/developers/:_id/edit" component={ EditDeveloper } onEnter={ authenticate } />
         <Route name="login" path="/login" component={ Login } />
         <Route name="recover-password" path="/recover-password" component={ RecoverPassword } />
         <Route name="reset-password" path="/reset-password/:token" component={ ResetPassword } />

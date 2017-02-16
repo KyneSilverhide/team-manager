@@ -1,0 +1,11 @@
+.timeline-wrapper > div:first-child  {
+    margin: 0 !important;
+}
+
+.timeline-wrapper > div:first-child > div:first-child {
+    margin: 0 !important;
+}
+
+.timeline-wrapper > div:first-child > div:first-child > ul:first-child li {
+    display: none;
+}

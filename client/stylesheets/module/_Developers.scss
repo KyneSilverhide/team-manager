@@ -1,0 +1,28 @@
+img.dev-avatar {
+  float: left;
+  height: 50px;
+  width: auto;
+  margin-right: 20px;
+}
+
+.dev-ratio .rangeslider.rangeslider-horizontal {
+  height: 10px;
+}
+
+.dev-ratio .rangeslider-horizontal .rangeslider__handle {
+  width: 10px;
+  height: 30px;
+}
+
+.dev-ratio  .rangeslider-horizontal .rangeslider__handle::after {
+  width: 0;
+}
+
+.dev-ratio .rangeslider-horizontal .rangeslider__tooltip {
+  left: -15px;
+}
+
+.form-control-static.dev-ratio-value {
+  margin-top: 6px;
+  font-size: 1.15em;
+}

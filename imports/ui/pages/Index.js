@@ -1,15 +1,22 @@
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
+import Slider from 'react-rangeslider'
+import 'react-rangeslider/lib/index.css'
+
+const handleChange = (value) => {
+    this.setState({
+      value: value
+    });
+}
 
 const Index = () => (
-  <div className="Index">
-    <Jumbotron className="text-center">
-      <h2>Base</h2>
-      <p>A starting point for Meteor applications.</p>
-      <p><a className="btn btn-success" href="https://themeteorchef.com/base" role="button">Read the Documentation</a></p>
-      <p style={ { fontSize: '16px', color: '#aaa' } }>Currently at v4.11.0</p>
-    </Jumbotron>
-  </div>
+  <div>
+    <Slider
+          min={0}
+          max={100}
+          value={50}
+          onChange={handleChange}
+        />
+    </div>
 );
 
 export default Index;
