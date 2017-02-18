@@ -4,8 +4,6 @@ import developerEditor from '../../modules/developer-editor.js';
 import {browserHistory} from 'react-router';
 import {remove as removeDiacritics} from 'diacritics';
 import {sortByName} from '../../modules/sorting.js';
-import Slider from 'react-rangeslider'
-import 'react-rangeslider/lib/index.css'
 
 const backToList = () => {
   browserHistory.push(`/developers`);
@@ -79,20 +77,6 @@ export default class DeveloperEditor extends React.Component {
               <option key={_id} value={_id}>{name}</option>
             ))}
           </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <ControlLabel>Ratio de développement</ControlLabel>
-          <Row className="dev-ratio">
-            <Col xs={10}>
-              <Slider min={0} max={100} value={devRatio} onChange={this.updateDevRatio.bind(this)} orientation='horizontal'/>
-              <input name="devRatio" type="hidden" value={devRatio}/>
-            </Col>
-            <Col xs={2}>
-              <FormControl.Static className="dev-ratio-value">
-                {devRatio}
-              </FormControl.Static>
-            </Col>
-          </Row>
         </FormGroup>
         <Button onClick={() => backToList()}>
           Annuler

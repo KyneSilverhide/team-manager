@@ -37,10 +37,6 @@ Developers.schema = new SimpleSchema({
     type: String,
     optional: true,
     label: 'The _id of the developer\'s team',
-  },
-  devRatio: {
-    type: Number,
-    label: 'How much development time, from 0 to 100%, this developer will spend actually developing stories',
   }
 });
 

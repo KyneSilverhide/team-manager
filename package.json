@@ -6,55 +6,14 @@
     "start": "meteor --settings settings-development.json"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "chimp": "^0.41.2",
-    "eslint": "^3.8.1",
+    "eslint": "^3.15.0",
     "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-meteor": "^4.0.1",
-    "eslint-plugin-react": "^6.4.1"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "plugins": [
-      "meteor",
-      "react"
-    ],
-    "extends": [
-      "airbnb/base",
-      "plugin:meteor/guide",
-      "plugin:react/recommended"
-    ],
-    "env": {
-      "browser": true
-    },
-    "globals": {
-      "server": false,
-      "browser": false,
-      "expect": false
-    },
-    "rules": {
-      "import/no-unresolved": 0,
-      "import/no-extraneous-dependencies": 0,
-      "import/extensions": 0,
-      "no-underscore-dangle": [
-        "error",
-        {
-          "allow": [
-            "_id",
-            "_ensureIndex",
-            "_verifyEmailToken",
-            "_resetPasswordToken",
-            "_name"
-          ]
-        }
-      ],
-      "class-methods-use-this": 0
-    }
+    "eslint-plugin-react": "^6.10.0"
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",

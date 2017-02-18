@@ -29,10 +29,6 @@ export const upsertDeveloper = new ValidatedMethod({
     teamId: {
       type: String,
       optional: true
-    },
-    devRatio: {
-      type: Number,
-      optional: false
     }
   }).validator(),
   run(developer) {

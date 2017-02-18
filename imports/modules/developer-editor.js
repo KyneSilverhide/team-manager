@@ -17,8 +17,7 @@ const handleUpsert = () => {
     lastname: document.querySelector('[name="lastname"]').value.trim(),
     mail: document.querySelector('[name="mail"]').value.trim(),
     jiraAlias: document.querySelector('[name="jiraAlias"]').value.trim(),
-    teamId: document.querySelector('[name="teamId"]').value.trim(),
-    devRatio: Number(document.querySelector('[name="devRatio"]').value)
+    teamId: document.querySelector('[name="teamId"]').value.trim()
   };
 
   if (developer && developer._id) {
@@ -53,11 +52,6 @@ const validate = () => {
       },
       teamId: {
         required: false
-      },
-      devRatio: {
-        required: true,
-        min: 1,
-        max: 100
       }
     },
     messages: {
@@ -72,11 +66,6 @@ const validate = () => {
       },
       jiraAlias: {
         required: 'Le login JIRA est obligatoire'
-      },
-      devRatio: {
-        required: 'Le ratio de développement est invalide',
-        min: 'Le ratio doit être supérieur à 0',
-        max: 'Le ratio doit inférieur ou égal à 100',
       }
     },
     submitHandler() {
