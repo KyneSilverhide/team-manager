@@ -1,33 +1,31 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 import {
   ListGroup,
   ListGroupItem,
   Alert,
   ButtonToolbar,
   ButtonGroup,
-  Button
+  Button,
 } from 'react-bootstrap';
-import {Bert} from 'meteor/themeteorchef:bert';
-import {removeVersion} from '../../api/versions/version.methods.js';
-import {sortByName} from '../../modules/sorting.js';
+import { Bert } from 'meteor/themeteorchef:bert';
+import { removeVersion } from '../../api/versions/version.methods.js';
+import { sortByName } from '../../modules/sorting.js';
 import HorizontalTimeline from 'react-timeline-view';
 
 const handleEdit = (_id) => {
   browserHistory.push(`/versions/${_id}/edit`);
-}
+};
 
-const getDates = (version) => {
-  return [
-    {'date': version.startDate, 'title': 'Début'},
-    {'date': version.freezeDate, 'title': 'Code freeze'},
-    {'date': version.endDate, 'title': 'Fin'}];
-}
+const getDates = version => [
+    { date: version.startDate, title: 'Début' },
+    { date: version.freezeDate, title: 'Code freeze' },
+    { date: version.endDate, title: 'Fin' }];
 
 const handleRemove = (_id) => {
   if (confirm('Etes-vous sûr de vouloir supprimer cette version?')) {
     removeVersion.call({
-      _id
+      _id,
     }, (error) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
@@ -37,12 +35,12 @@ const handleRemove = (_id) => {
       }
     });
   }
-}
+};
 
-const VersionsList = ({versions}) => {
+const VersionsList = ({ versions }) => {
   if (versions.length > 0) {
     return <ListGroup className="VersionsList">
-      {versions.sort(sortByName).map((version) => (
+      {versions.sort(sortByName).map(version => (
         <ListGroupItem key={version._id}>
           <h4>{version.name}</h4>
           <span className="pull-right">
@@ -55,14 +53,13 @@ const VersionsList = ({versions}) => {
           </div>
           </ListGroupItem>
       ))}
-    </ListGroup>
-  } else {
-    return <Alert bsStyle="warning">Il n'y a aucune version pour l'instant</Alert>;
+    </ListGroup>;
   }
-}
+  return <Alert bsStyle="warning">Il n'y a aucune version pour l'instant</Alert>;
+};
 
 VersionsList.propTypes = {
-  versions: React.PropTypes.array
+  versions: React.PropTypes.array,
 };
 
 export default VersionsList;

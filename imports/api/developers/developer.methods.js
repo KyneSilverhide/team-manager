@@ -1,5 +1,5 @@
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {ValidatedMethod} from 'meteor/mdg:validated-method';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Developers from './developer.model.js';
 import rateLimit from '../../modules/rate-limit.js';
 
@@ -8,52 +8,52 @@ export const upsertDeveloper = new ValidatedMethod({
   validate: new SimpleSchema({
     _id: {
       type: String,
-      optional: true
+      optional: true,
     },
     firstname: {
       type: String,
-      optional: false
+      optional: false,
     },
     lastname: {
       type: String,
-      optional: false
+      optional: false,
     },
     mail: {
       type: String,
-      optional: false
+      optional: false,
     },
     jiraAlias: {
       type: String,
-      optional: false
+      optional: false,
     },
     teamId: {
       type: String,
-      optional: true
-    }
+      optional: true,
+    },
   }).validator(),
   run(developer) {
     return Developers.upsert({
-      _id: developer._id
-    }, {$set: developer});
-  }
+      _id: developer._id,
+    }, { $set: developer });
+  },
 });
 
 export const removeDeveloper = new ValidatedMethod({
   name: 'developers.remove',
   validate: new SimpleSchema({
     _id: {
-      type: String
-    }
+      type: String,
+    },
   }).validator(),
-  run({_id}) {
+  run({ _id }) {
     Developers.remove(_id);
-  }
+  },
 });
 
 rateLimit({
   methods: [
-    upsertDeveloper, removeDeveloper
+    upsertDeveloper, removeDeveloper,
   ],
   limit: 5,
-  timeRange: 1000
+  timeRange: 1000,
 });

@@ -2,26 +2,26 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import Developers from './developer.model';
 
-Meteor.publish('developers.list', function(mailFilter, limit) {
+Meteor.publish('developers.list', (mailFilter, limit) => {
   check(limit, Number);
   check(mailFilter, String);
   return Developers.find({
-    'mail': {
-      '$regex': '.*' + mailFilter || '.*',
-      '$options': 'i'
-    }
+    mail: {
+      $regex: `.*${mailFilter}` || '.*',
+      $options: 'i',
+    },
   }, {
     sort: {
-      mail: 1
+      mail: 1,
     },
-    limit: limit
+    limit,
   });
 });
 
-Meteor.publish('developers.by.team', function(teamId) {
+Meteor.publish('developers.by.team', (teamId) => {
   check(teamId, String);
   return Developers.find({
-    'teamId': teamId
+    teamId,
   });
 });
 

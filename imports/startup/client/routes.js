@@ -14,7 +14,7 @@ import EditTeam from '../../ui/containers/EditTeam.js';
 import NewVersion from '../../ui/pages/NewVersion.js';
 import NewRun from '../../ui/containers/NewRun.js';
 import EditVersion from '../../ui/containers/EditVersion.js';
-import NewDeveloper from '../../ui/pages/NewDeveloper.js';
+import NewDeveloper from '../../ui/containers/NewDeveloper.js';
 import EditDeveloper from '../../ui/containers/EditDeveloper.js';
 import EditRun from '../../ui/containers/EditRun.js';
 import Index from '../../ui/pages/Index.js';

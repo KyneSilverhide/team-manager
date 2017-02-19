@@ -25,6 +25,7 @@
     "react": "^15.3.2",
     "react-addons-pure-render-mixin": "^15.3.2",
     "react-bootstrap": "^0.30.5",
+    "react-confirm-bootstrap": "^3.1.2",
     "react-dom": "^15.3.2",
     "react-komposer": "^1.13.1",
     "react-rangeslider": "^2.0.1",
