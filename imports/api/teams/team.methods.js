@@ -7,7 +7,7 @@ export const upsertTeam = new ValidatedMethod({
   name: 'teams.upsert',
   validate: new SimpleSchema({
     _id: { type: String, optional: true },
-    name: { type: String, optional: true }
+    name: { type: String, optional: true },
   }).validator(),
   run(team) {
     return Teams.upsert({ _id: team._id }, { $set: team });

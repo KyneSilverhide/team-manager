@@ -37,7 +37,7 @@ Developers.schema = new SimpleSchema({
     type: String,
     optional: true,
     label: 'The _id of the developer\'s team',
-  }
+  },
 });
 
 Developers.attachSchema(Developers.schema);

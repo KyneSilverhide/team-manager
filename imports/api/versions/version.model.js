@@ -32,7 +32,7 @@ Versions.schema = new SimpleSchema({
   freezeDate: {
     type: Date,
     label: 'When the code freeze occurs',
-  }
+  },
 });
 
 Versions.attachSchema(Versions.schema);

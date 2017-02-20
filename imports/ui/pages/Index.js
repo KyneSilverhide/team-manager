@@ -1,22 +1,18 @@
 import React from 'react';
-import Slider from 'react-rangeslider'
-import 'react-rangeslider/lib/index.css'
-
-const handleChange = (value) => {
-    this.setState({
-      value: value
-    });
-}
+import { Row, Col } from 'react-bootstrap';
+import RunsOverview from '../containers/RunsOverview.js';
 
 const Index = () => (
-  <div>
-    <Slider
-          min={0}
-          max={100}
-          value={50}
-          onChange={handleChange}
-        />
-    </div>
+  <div className="Runs">
+    <Row>
+      <Col xs={ 12 }>
+        <div className="page-header clearfix">
+          <h4 className="pull-left">Contrôle du développement</h4>
+        </div>
+        <RunsOverview />
+      </Col>
+    </Row>
+  </div>
 );
 
 export default Index;

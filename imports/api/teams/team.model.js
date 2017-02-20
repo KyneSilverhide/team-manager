@@ -20,7 +20,7 @@ Teams.schema = new SimpleSchema({
   name: {
     type: String,
     label: 'The name of the team',
-  }
+  },
 });
 
 Teams.attachSchema(Teams.schema);

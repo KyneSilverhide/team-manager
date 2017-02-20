@@ -1,17 +1,11 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import {
-  ListGroup,
-  ListGroupItem,
-  Alert,
-  ButtonToolbar,
-  ButtonGroup,
-  Button,
-} from 'react-bootstrap';
+import HorizontalTimeline from 'react-timeline-view';
+import { ListGroup, ListGroupItem, Alert } from 'react-bootstrap';
+import Confirm from 'react-confirm-bootstrap';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { removeVersion } from '../../api/versions/version.methods.js';
 import { sortByName } from '../../modules/sorting.js';
-import HorizontalTimeline from 'react-timeline-view';
 
 const handleEdit = (_id) => {
   browserHistory.push(`/versions/${_id}/edit`);
@@ -23,30 +17,33 @@ const getDates = version => [
     { date: version.endDate, title: 'Fin' }];
 
 const handleRemove = (_id) => {
-  if (confirm('Etes-vous sûr de vouloir supprimer cette version?')) {
-    removeVersion.call({
-      _id,
-    }, (error) => {
-      if (error) {
-        Bert.alert(error.reason, 'danger');
-      } else {
-        Bert.alert('Equipe supprimée', 'success');
-        browserHistory.push('/versions');
-      }
-    });
-  }
+  removeVersion.call({
+    _id,
+  }, (error) => {
+    if (error) {
+      Bert.alert(error.reason, 'danger');
+    } else {
+      Bert.alert('Equipe supprimée', 'success');
+      browserHistory.push('/versions');
+    }
+  });
 };
 
 const VersionsList = ({ versions }) => {
   if (versions.length > 0) {
     return <ListGroup className="VersionsList">
       {versions.sort(sortByName).map(version => (
-        <ListGroupItem key={version._id}>
+        <ListGroupItem key={version._id} className='clearfix'>
           <h4>{version.name}</h4>
           <span className="pull-right">
-            <span className="btn btn-default" onClick={() => handleEdit(version._id)}>Editer</span>
+            <button className="btn btn-sm btn-default" onClick={() => handleEdit(version._id)}>Editer</button>
             &nbsp;
-            <span className="btn btn-danger" onClick={() => handleRemove(version._id)}>Supprimer</span>
+            <Confirm
+              onConfirm={() => handleRemove(version._id)}
+              body="Etes-vous sur de vouloir supprimer cette version? Cela aura un impact sur les Runs liés."
+              confirmText="Supprimer" cancelText="Annuler" title="Suppression">
+              <button className="btn btn-sm btn-danger">Supprimer</button>
+            </Confirm>
           </span>
           <div className="timeline-wrapper">
             <HorizontalTimeline index={2} eventsMinDistance={50} values={ getDates(version) } />

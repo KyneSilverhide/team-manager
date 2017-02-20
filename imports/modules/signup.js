@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import { browserHistory } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
@@ -51,18 +49,18 @@ const validate = () => {
     },
     messages: {
       firstName: {
-        required: 'First name?',
+        required: 'Le prénom doit être renseigné',
       },
       lastName: {
-        required: 'Last name?',
+        required: 'Le nom de famille doit être renseigné',
       },
       emailAddress: {
-        required: 'Need an email address here.',
-        email: 'Is this email address legit?',
+        required: 'L\'adresse mail est obligatoire',
+        email: 'L\'email n\'est pas valide',
       },
       password: {
-        required: 'Need a password here.',
-        minlength: 'Use at least six characters, please.',
+        required: 'Le mot de passe est obligatoire',
+        minlength: 'Le mot de passe doit contneir au moins 6 caractères',
       },
     },
     submitHandler() { signup(); },

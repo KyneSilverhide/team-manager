@@ -13,7 +13,7 @@ const composer = ({ params }, onData) => {
     const developer = Developers.findOne();
     const teams = Teams.find().fetch();
 
-    onData(null, { developer: developer, teams: teams });
+    onData(null, { developer, teams });
   }
 };
 

@@ -43,21 +43,17 @@ export default class DevelopersList extends React.Component {
     const { developers } = this.props;
     return <div>
       {developers.sort(sortByName).map(developer => (
-        <ListGroupItem key={developer._id}>
+        <ListGroupItem key={developer._id} className='clearFix'>
           <h4>{developer.firstname} {developer.lastname}</h4>
-          <img
-            className="dev-avatar"
-            src={`https://jira.xperthis.be/secure/useravatar?ownerId=${developer.jiraAlias}`}/>
+          <img className="dev-avatar" src={`https://jira.xperthis.be/secure/useravatar?ownerId=${developer.jiraAlias}`}/>
           <span className="pull-right">
-            <span className="btn btn-default" onClick={() => handleEdit(developer._id)}>Editer</span>
+            <button className="btn btn-sm btn-default" onClick={() => handleEdit(developer._id)}>Editer</button>
             &nbsp;
             <Confirm
               onConfirm={() => handleRemove(developer._id)}
               body="Etes-vous sur de vouloir supprimer ce développeur?"
-              confirmText="Supprimer"
-              cancelText="Annuler"
-              title="Suppression">
-              <span className="btn btn-danger">Supprimer</span>
+              confirmText="Supprimer" cancelText="Annuler" title="Suppression">
+              <button className="btn btn-sm btn-danger">Supprimer</button>
             </Confirm>
           </span>
           <p>
