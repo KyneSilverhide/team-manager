@@ -2,8 +2,8 @@ import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import { remove as removeDiacritics } from 'diacritics';
-import developerEditor from '../../modules/developer-editor.js';
-import { sortByName } from '../../modules/sorting.js';
+import developerEditor from '../../../modules/developer-editor.js';
+import { sortByName } from '../../../modules/sorting.js';
 
 const backToList = () => {
   browserHistory.push('/developers');

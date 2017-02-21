@@ -1,7 +1,7 @@
 import { composeWithTracker } from 'react-komposer';
 import { Meteor } from 'meteor/meteor';
 import Runs from '../../api/runs/run.model.js';
-import RunsOverview from '../components/RunsOverview.js';
+import RunsOverview from '../components/runs/RunsOverview.js';
 import Loading from '../components/Loading.js';
 
 const composer = (params, onData) => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
-import versionEditor from '../../modules/version-editor.js';
-import dateFaIcons from '../../modules/date-fa-icons.js';
+import versionEditor from '../../../modules/version-editor.js';
+import dateFaIcons from '../../../modules/date-fa-icons.js';
 
 const backToList = () => {
   browserHistory.push('/versions');

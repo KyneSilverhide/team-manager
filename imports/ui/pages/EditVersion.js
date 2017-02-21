@@ -1,5 +1,5 @@
 import React from 'react';
-import VersionEditor from '../components/VersionEditor.js';
+import VersionEditor from '../components/versions/VersionEditor.js';
 
 const EditVersion = ({ version }) => (
   <div className="EditVersion">

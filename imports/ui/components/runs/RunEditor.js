@@ -2,9 +2,9 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { Session } from 'meteor/session';
 import { FormGroup, ControlLabel, FormControl, Button, Table } from 'react-bootstrap';
-import DeveloperState from './DeveloperState.js';
-import runEditor from '../../modules/run-editor.js';
-import { sortByName } from '../../modules/sorting.js';
+import DeveloperAssociation from './DeveloperAssociation.js';
+import runEditor from '../../../modules/run-editor.js';
+import { sortByName } from '../../../modules/sorting.js';
 
 const backToList = () => {
   browserHistory.push('/runs');
@@ -57,7 +57,7 @@ export default class RunEditor extends React.Component {
           </thead>
           <tbody>
             {developers.sort(sortByName).map(developer => (
-              <DeveloperState key={developer._id} developer={developer} ref={`dev-${developer._id}`}/>
+              <DeveloperAssociation key={developer._id} developer={developer} ref={`dev-${developer._id}`}/>
             ))}
           </tbody>
         </Table>

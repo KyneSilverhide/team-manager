@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-rangeslider/lib/index.css';
 
-export default class DeveloperState extends React.Component {
+export default class DeveloperAssociation extends React.Component {
 
   constructor(props) {
     super(props);
@@ -40,6 +40,6 @@ export default class DeveloperState extends React.Component {
   }
 }
 
-DeveloperState.propTypes = {
+DeveloperAssociation.propTypes = {
   developer: React.PropTypes.object,
 };

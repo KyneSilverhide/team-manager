@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
-import RunEditor from '../components/RunEditor.js';
+import RunEditor from '../components/runs/RunEditor.js';
 
 const NewRun = ({ versions, teams, developers }) => (
   <div className="NewRun">

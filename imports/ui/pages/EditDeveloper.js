@@ -1,5 +1,5 @@
 import React from 'react';
-import DeveloperEditor from '../components/DeveloperEditor.js';
+import DeveloperEditor from '../components/developers/DeveloperEditor.js';
 
 const EditDeveloper = ({ developer, teams }) => (
   <div className="EditDeveloper">
@@ -10,7 +10,7 @@ const EditDeveloper = ({ developer, teams }) => (
 
 EditDeveloper.propTypes = {
   developer: React.PropTypes.object,
-  teams: React.PropTypes.array
+  teams: React.PropTypes.array,
 };
 
 export default EditDeveloper;

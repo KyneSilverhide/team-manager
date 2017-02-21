@@ -3,8 +3,8 @@ import { browserHistory } from 'react-router';
 import { ListGroup, ListGroupItem, Alert } from 'react-bootstrap';
 import Confirm from 'react-confirm-bootstrap';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { archiveRun, removeRun } from '../../api/runs/run.methods.js';
-import { sortByName } from '../../modules/sorting.js';
+import { archiveRun, removeRun } from '../../../api/runs/run.methods.js';
+import { sortByName } from '../../../modules/sorting.js';
 
 const handleEdit = (_id) => {
   browserHistory.push(`/runs/${_id}/edit`);

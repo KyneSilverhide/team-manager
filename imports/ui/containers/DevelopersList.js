@@ -2,7 +2,7 @@ import { composeWithTracker } from 'react-komposer';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import Developers from '../../api/developers/developer.model.js';
-import DevelopersList from '../components/DevelopersList.js';
+import DevelopersList from '../components/developers/DevelopersList.js';
 import Loading from '../components/Loading.js';
 
 const composer = (params, onData) => {

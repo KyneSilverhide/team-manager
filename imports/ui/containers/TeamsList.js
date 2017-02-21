@@ -1,7 +1,7 @@
 import { composeWithTracker } from 'react-komposer';
 import { Meteor } from 'meteor/meteor';
 import Teams from '../../api/teams/team.model.js';
-import TeamsList from '../components/TeamsList.js';
+import TeamsList from '../components/teams/TeamsList.js';
 import Loading from '../components/Loading.js';
 
 const composer = (params, onData) => {

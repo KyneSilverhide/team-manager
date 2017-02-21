@@ -4,8 +4,8 @@ import HorizontalTimeline from 'react-timeline-view';
 import { ListGroup, ListGroupItem, Alert } from 'react-bootstrap';
 import Confirm from 'react-confirm-bootstrap';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { removeVersion } from '../../api/versions/version.methods.js';
-import { sortByName } from '../../modules/sorting.js';
+import { removeVersion } from '../../../api/versions/version.methods.js';
+import { sortByName } from '../../../modules/sorting.js';
 
 const handleEdit = (_id) => {
   browserHistory.push(`/versions/${_id}/edit`);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListGroup, ListGroupItem, Alert } from 'react-bootstrap';
-import { sortByName } from '../../modules/sorting.js';
+import { sortByName } from '../../../modules/sorting.js';
 
 const RunsOverview = ({ runs }) => {
   if (runs.length > 0) {

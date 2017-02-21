@@ -3,7 +3,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import teamEditor from '../../modules/team-editor.js';
+import teamEditor from '../../../modules/team-editor.js';
 
 const backToList = () => {
   browserHistory.push('/teams');
