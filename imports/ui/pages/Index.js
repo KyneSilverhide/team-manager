@@ -6,8 +6,8 @@ const Index = () => (
   <div className="Runs">
     <Row>
       <Col xs={ 12 }>
-        <div className="page-header clearfix">
-          <h4 className="pull-left">Contrôle du développement</h4>
+        <div className="clearfix">
+          <h1 className="pull-left">Contrôle du développement</h1>
         </div>
         <RunsOverview />
       </Col>
