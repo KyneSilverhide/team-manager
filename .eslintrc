@@ -1,0 +1,44 @@
+{
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "meteor",
+    "react"
+  ],
+  "extends": [
+    "airbnb/base",
+    "plugin:meteor/guide",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "server": false,
+    "browser": false,
+    "expect": false,
+    "$": true
+  },
+  "rules": {
+    "import/no-unresolved": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": 0,
+    "max-len": 0,
+    "no-underscore-dangle": [
+      1,
+      {
+        "allow": [
+          "_id",
+          "_ensureIndex",
+          "_verifyEmailToken",
+          "_resetPasswordToken",
+          "_name"
+        ]
+      }
+    ],
+    "class-methods-use-this": 0
+  }
+}
