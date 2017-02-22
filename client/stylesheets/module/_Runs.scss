@@ -2,3 +2,27 @@ li.archived-run {
   opacity: 0.6;
   background-color: #FFFFFF;
 }
+
+h1.panel-title {
+  font-size: 25px;
+}
+
+div.panel-heading {
+  height: 58px;
+}
+
+div.panel-body .row {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+div.run-overview div.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.dev-avatars-small {
+  width: 35px;
+  margin-right: 15px;
+}

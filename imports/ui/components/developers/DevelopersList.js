@@ -43,7 +43,7 @@ export default class DevelopersList extends React.Component {
     const { developers } = this.props;
     return <div>
       {developers.sort(sortByName).map(developer => (
-        <ListGroupItem key={developer._id} className='clearFix'>
+        <ListGroupItem key={developer._id} className='clearfix'>
           <h4>{developer.firstname} {developer.lastname}</h4>
           <img className="dev-avatar" src={`https://jira.xperthis.be/secure/useravatar?ownerId=${developer.jiraAlias}`}/>
           <span className="pull-right">
