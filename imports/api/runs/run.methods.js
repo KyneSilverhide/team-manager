@@ -16,6 +16,8 @@ export const upsertRun = new ValidatedMethod({
     'developers.$._id': { type: String, optional: false },
     'developers.$.firstname': { type: String, optional: false },
     'developers.$.lastname': { type: String, optional: false },
+    'developers.$.mail': { type: String, optional: false },
+    'developers.$.jiraAlias': { type: String, optional: false },
     'developers.$.devRatio': { type: Number, optional: false },
     'developers.$.holidays': { type: Number, optional: false },
   }).validator(),

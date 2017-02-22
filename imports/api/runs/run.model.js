@@ -45,6 +45,14 @@ Runs.schema = new SimpleSchema({
     type: String,
     label: 'The lastname of the developer in this run',
   },
+  'developers.$.mail': {
+    type: String,
+    label: 'The mail of the developer in this run',
+  },
+  'developers.$.jiraAlias': {
+    type: String,
+    label: 'The jira login of the developer in this run',
+  },
   'developers.$.devRatio': {
     type: Number,
     label: 'Define the percentage of time this developer will work on stories',

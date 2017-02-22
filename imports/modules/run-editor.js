@@ -14,6 +14,8 @@ const buildDevelopers = (componentRefs) => {
         _id: ref.state._id,
         firstname: ref.state.firstname,
         lastname: ref.state.lastname,
+        jiraAlias: ref.state.jiraAlias,
+        mail: ref.state.mail,
         devRatio: Number(ref.state.devRatio),
         holidays: Number(ref.state.holidays),
       };

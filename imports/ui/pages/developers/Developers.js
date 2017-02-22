@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, Button } from 'react-bootstrap';
-import DevelopersList from '../containers/DevelopersList.js';
+import DevelopersList from '../../containers/developers/DevelopersList.js';
 
 const Developers = () => (
   <div className="Developers">

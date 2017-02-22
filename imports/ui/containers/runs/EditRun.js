@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import { Session } from 'meteor/session';
-import Runs from '../../api/runs/run.model.js';
-import Versions from '../../api/versions/version.model.js';
-import Teams from '../../api/teams/team.model.js';
-import Developers from '../../api/developers/developer.model.js';
-import EditRun from '../pages/EditRun.js';
-import Loading from '../components/Loading.js';
+import Runs from '../../../api/runs/run.model.js';
+import Versions from '../../../api/versions/version.model.js';
+import Teams from '../../../api/teams/team.model.js';
+import Developers from '../../../api/developers/developer.model.js';
+import EditRun from '../../pages/runs/EditRun.js';
+import Loading from '../../components/Loading.js';
 
 const composer = ({ params }, onData) => {
   const runsSub = Meteor.subscribe('runs.view', params._id);

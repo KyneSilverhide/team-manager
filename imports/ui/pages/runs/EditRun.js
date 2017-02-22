@@ -1,5 +1,5 @@
 import React from 'react';
-import RunEditor from '../components/runs/RunEditor.js';
+import RunEditor from '../../components/runs/RunEditor.js';
 
 const EditRun = ({ run, versions, teams, developers }) => (
   <div className="EditRun">

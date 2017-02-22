@@ -1,11 +1,11 @@
 import { composeWithTracker } from 'react-komposer';
 import { Meteor } from 'meteor/meteor';
 import Holidays from 'date-holidays';
-import Runs from '../../api/runs/run.model.js';
-import Versions from '../../api/versions/version.model.js';
-import Teams from '../../api/teams/team.model.js';
-import RunsOverview from '../components/runs/RunsOverview.js';
-import Loading from '../components/Loading.js';
+import Runs from '../../../api/runs/run.model.js';
+import Versions from '../../../api/versions/version.model.js';
+import Teams from '../../../api/teams/team.model.js';
+import RunsOverview from '../../components/runs/RunsOverview.js';
+import Loading from '../../components/Loading.js';
 
 const composer = (params, onData) => {
   const runSub = Meteor.subscribe('runs.my.active.list');

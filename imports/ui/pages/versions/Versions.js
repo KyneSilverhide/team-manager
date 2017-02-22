@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, Button } from 'react-bootstrap';
-import VersionsList from '../containers/VersionsList.js';
+import VersionsList from '../../containers/versions/VersionsList.js';
 
 const Versions = () => (
   <div className="Versions">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import RunsOverview from '../containers/RunsOverview.js';
+import RunsOverview from '../containers/runs/RunsOverview.js';
 
 const Index = () => (
   <div className="Runs">

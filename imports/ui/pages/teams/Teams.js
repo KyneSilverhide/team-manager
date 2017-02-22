@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, Button } from 'react-bootstrap';
-import TeamsList from '../containers/TeamsList.js';
+import TeamsList from '../../containers/teams/TeamsList.js';
 
 const Teams = () => (
   <div className="Teams">

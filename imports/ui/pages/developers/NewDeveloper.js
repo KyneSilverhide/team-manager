@@ -1,5 +1,5 @@
 import React from 'react';
-import DeveloperEditor from '../components/developers/DeveloperEditor.js';
+import DeveloperEditor from '../../components/developers/DeveloperEditor.js';
 
 const NewDeveloper = ({ teams }) => (
   <div className="NewDeveloper">

@@ -1,5 +1,5 @@
 import React from 'react';
-import TeamEditor from '../components/teams/TeamEditor.js';
+import TeamEditor from '../../components/teams/TeamEditor.js';
 
 const NewTeam = () => (
   <div className="NewTeam">

@@ -1,8 +1,8 @@
 import { composeWithTracker } from 'react-komposer';
 import { Meteor } from 'meteor/meteor';
-import Runs from '../../api/runs/run.model.js';
-import RunsList from '../components/runs/RunsList.js';
-import Loading from '../components/Loading.js';
+import Runs from '../../../api/runs/run.model.js';
+import RunsList from '../../components/runs/RunsList.js';
+import Loading from '../../components/Loading.js';
 
 const composer = (params, onData) => {
   const subscription = Meteor.subscribe('runs.my.list');

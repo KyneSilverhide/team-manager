@@ -16,6 +16,8 @@ export default class DeveloperAssociation extends React.Component {
     this.setState({ lastname: developer.lastname });
     this.setState({ holidays: developer.holidays || 0 });
     this.setState({ devRatio: developer.devRatio || 0 });
+    this.setState({ mail: developer.mail });
+    this.setState({ jiraAlias: developer.jiraAlias });
   }
 
   updateHolidays(event) {

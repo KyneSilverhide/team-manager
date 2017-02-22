@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
-import Developers from '../../api/developers/developer.model.js';
-import Teams from '../../api/teams/team.model.js';
-import EditDeveloper from '../pages/EditDeveloper.js';
-import Loading from '../components/Loading.js';
+import Developers from '../../../api/developers/developer.model.js';
+import Teams from '../../../api/teams/team.model.js';
+import EditDeveloper from '../../pages/developers/EditDeveloper.js';
+import Loading from '../../components/Loading.js';
 
 const composer = ({ params }, onData) => {
   const developersSub = Meteor.subscribe('developers.view', params._id);

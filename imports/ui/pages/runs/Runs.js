@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, Button } from 'react-bootstrap';
-import RunsList from '../containers/RunsList.js';
+import RunsList from '../../containers/runs/RunsList.js';
 
 const Runs = () => (
   <div className="Runs">

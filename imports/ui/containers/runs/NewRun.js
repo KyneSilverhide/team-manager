@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import { Session } from 'meteor/session';
-import Versions from '../../api/versions/version.model.js';
-import Teams from '../../api/teams/team.model.js';
-import Developers from '../../api/developers/developer.model.js';
-import NewRun from '../pages/NewRun.js';
-import Loading from '../components/Loading.js';
+import Versions from '../../../api/versions/version.model.js';
+import Teams from '../../../api/teams/team.model.js';
+import Developers from '../../../api/developers/developer.model.js';
+import NewRun from '../../pages/runs/NewRun.js';
+import Loading from '../../components/Loading.js';
 
 const composer = ({ params }, onData) => {
   const teamsSub = Meteor.subscribe('teams.list');
