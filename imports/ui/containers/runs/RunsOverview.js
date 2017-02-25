@@ -1,6 +1,8 @@
 import { composeWithTracker } from 'react-komposer';
 import { Meteor } from 'meteor/meteor';
 import Holidays from 'date-holidays';
+import moment from 'moment';
+import business from 'moment-business';
 import Runs from '../../../api/runs/run.model.js';
 import Versions from '../../../api/versions/version.model.js';
 import Teams from '../../../api/teams/team.model.js';
@@ -20,14 +22,20 @@ const composer = (params, onData) => {
       const team = Teams.findOne({ _id: run.teamId });
       const version = Versions.findOne({ _id: run.versionId });
 
+      const startYear = version.startDate.getFullYear();
+      const endYear = version.endDate.getFullYear();
       const holidaysAtStartYear = holidayFactory.getHolidays(version.startDate.getFullYear());
-      const holidaysAtEndYear = holidayFactory.getHolidays(version.endDate.getFullYear());
-      const candidateHolidays = holidaysAtStartYear.concat(holidaysAtEndYear);
+      let candidateHolidays = holidaysAtStartYear;
+      if (startYear !== endYear) {
+        const holidaysAtEndYear = holidayFactory.getHolidays(version.endDate.getFullYear());
+        candidateHolidays = holidaysAtStartYear.concat(holidaysAtEndYear);
+      }
       const holidays = candidateHolidays.filter((holiday) => {
         const holidayDate = new Date(holiday.date);
         return holiday.type === 'public'
         && holidayDate >= version.startDate
-        && holidayDate <= version.endDate;
+        && holidayDate <= version.endDate
+        && business.isWeekDay(moment(holidayDate));
       });
 
       run.team = team;

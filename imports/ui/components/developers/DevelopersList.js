@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 import { Session } from 'meteor/session';
 import Waypoint from 'react-waypoint';
 import Confirm from 'react-confirm-bootstrap';
+import FontAwesome from 'react-fontawesome';
 import { ListGroup, ListGroupItem, FormControl, FormGroup, ControlLabel, Alert } from 'react-bootstrap';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { removeDeveloper } from '../../../api/developers/developer.methods.js';
@@ -47,13 +48,13 @@ export default class DevelopersList extends React.Component {
           <h4>{developer.firstname} {developer.lastname}</h4>
           <img className="dev-avatar" src={`https://jira.xperthis.be/secure/useravatar?ownerId=${developer.jiraAlias}`}/>
           <span className="pull-right">
-            <button className="btn btn-sm btn-default" onClick={() => handleEdit(developer._id)}>Editer</button>
+            <button className="btn btn-sm btn-default" onClick={() => handleEdit(developer._id)}><FontAwesome name='pencil'/> Editer</button>
             &nbsp;
             <Confirm
               onConfirm={() => handleRemove(developer._id)}
               body="Etes-vous sur de vouloir supprimer ce développeur?"
               confirmText="Supprimer" cancelText="Annuler" title="Suppression">
-              <button className="btn btn-sm btn-danger">Supprimer</button>
+              <button className="btn btn-sm btn-danger"><FontAwesome name='trash'/> Supprimer</button>
             </Confirm>
           </span>
           <p>

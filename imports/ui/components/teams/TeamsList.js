@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 import { ListGroup, ListGroupItem, Alert } from 'react-bootstrap';
 import Confirm from 'react-confirm-bootstrap';
 import { Bert } from 'meteor/themeteorchef:bert';
+import FontAwesome from 'react-fontawesome';
 import { removeTeam } from '../../../api/teams/team.methods.js';
 import { sortByName } from '../../../modules/sorting.js';
 
@@ -27,13 +28,13 @@ const TeamsList = ({ teams }) => (teams.length > 0
         <ListGroupItem key={_id} className='clearfix'>
           {name}
           <span className="pull-right">
-            <button className="btn btn-sm btn-default" onClick={() => handleEdit(_id)}>Editer</button>
+            <button className="btn btn-sm btn-default" onClick={() => handleEdit(_id)}><FontAwesome name='pencil'/> Editer</button>
             &nbsp;
             <Confirm
               onConfirm={() => handleRemove(_id)}
               body="Etes-vous sur de vouloir supprimer cette équipe?"
               confirmText="Supprimer" cancelText="Annuler" title="Suppression">
-              <button className="btn btn-sm btn-danger">Supprimer</button>
+              <button className="btn btn-sm btn-danger"><FontAwesome name='trash'/> Supprimer</button>
             </Confirm>
           </span>
         </ListGroupItem>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, Button } from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 import VersionsList from '../../containers/versions/VersionsList.js';
 
 const Versions = () => (
@@ -10,7 +11,7 @@ const Versions = () => (
         <div className="page-header clearfix">
           <h4 className="pull-left">Versions</h4>
           <Link to="/versions/new">
-            <Button bsStyle="success" className="pull-right">Ajouter une version</Button>
+            <Button bsStyle="success" className="pull-right"><FontAwesome name='plus'/> Ajouter une version</Button>
           </Link>
         </div>
         <VersionsList />

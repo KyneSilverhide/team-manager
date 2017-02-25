@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { ListGroup, ListGroupItem, Alert } from 'react-bootstrap';
 import Confirm from 'react-confirm-bootstrap';
+import FontAwesome from 'react-fontawesome';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { archiveRun, removeRun } from '../../../api/runs/run.methods.js';
 import { sortByName } from '../../../modules/sorting.js';
@@ -40,14 +41,14 @@ const renderEditButton = (run) => {
   if (run.archived) {
     return '';
   }
-  return <button className="btn btn-sm btn-default" onClick={() => handleEdit(run._id)}>Editer</button>;
+  return <button className="btn btn-sm btn-default" onClick={() => handleEdit(run._id)}><FontAwesome name='pencil'/> Editer</button>;
 };
 
 const renderArchiveButton = (run) => {
   if (run.archived) {
-    return <button className="btn btn-sm btn-default" onClick={() => handleArchive(run._id, true)}>Désarchiver</button>;
+    return <button className="btn btn-sm btn-default" onClick={() => handleArchive(run._id, true)}><FontAwesome name='undo'/> Désarchiver</button>;
   }
-  return <button className="btn btn-sm btn-info" onClick={() => handleArchive(run._id, false)}>Archiver</button>;
+  return <button className="btn btn-sm btn-info" onClick={() => handleArchive(run._id, false)}><FontAwesome name='check'/> Archiver</button>;
 };
 
 const renderDeleteButton = (run) => {
@@ -58,7 +59,7 @@ const renderDeleteButton = (run) => {
       confirmText="Supprimer"
       cancelText="Annuler"
       title="Suppression">
-      <button className="btn btn-sm btn-danger">Supprimer</button>
+      <button className="btn btn-sm btn-danger"><FontAwesome name='trash'/> Supprimer</button>
     </Confirm>;
   }
   return '';

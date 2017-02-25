@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { Session } from 'meteor/session';
 import { FormGroup, ControlLabel, FormControl, Button, Table } from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 import DeveloperAssociation from './DeveloperAssociation.js';
 import runEditor from '../../../modules/run-editor.js';
 import { sortByName } from '../../../modules/sorting.js';
@@ -62,13 +63,11 @@ export default class RunEditor extends React.Component {
           </tbody>
         </Table>
         <Button onClick={() => backToList()}>
-          Annuler
+          <FontAwesome name='undo'/> Annuler
         </Button>
         &nbsp;
         <Button type="submit" bsStyle="success">
-          {run && run._id
-            ? 'Enregistrer'
-            : 'Ajouter'}
+          <FontAwesome name='floppy-o'/> {run && run._id ? 'Enregistrer' : 'Ajouter'}
         </Button>
       </form>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router';
+import FontAwesome from 'react-fontawesome';
 import PublicNavigation from './PublicNavigation.js';
 import AuthenticatedNavigation from './AuthenticatedNavigation.js';
 
@@ -10,7 +11,7 @@ const AppNavigation = ({ hasUser }) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to="/">Team Manager</Link>
+        <Link to="/"><FontAwesome name='home'/> Team Manager</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>

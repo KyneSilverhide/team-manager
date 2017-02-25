@@ -26,3 +26,21 @@ div.run-overview div.vcenter {
   width: 35px;
   margin-right: 15px;
 }
+
+div#developmentDaysTooltip {
+  width: 600px;
+  max-width: 100%
+}
+
+ul.run-counters h2 {
+  font-size: 22px;
+}
+
+ul.run-counters h3 {
+  font-size: 18px;
+}
+
+ul.run-counters li.list-group-item {
+  padding-top: 0px;
+  padding-left: 15px;
+}

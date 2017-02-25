@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 import { browserHistory } from 'react-router';
 import versionEditor from '../../../modules/version-editor.js';
 import dateFaIcons from '../../../modules/date-fa-icons.js';
@@ -76,13 +77,11 @@ export default class TeamEditor extends React.Component {
           <FormControl type="text" name="endDate" placeholder="Date de fin de la version"/>
         </FormGroup>
         <Button onClick={() => backToList()}>
-          Annuler
+          <FontAwesome name='undo'/> Annuler
         </Button>
         &nbsp;
         <Button type="submit" bsStyle="success">
-          {version && version._id
-            ? 'Enregistrer'
-            : 'Ajouter'}
+          <FontAwesome name='floppy-o'/> {version && version._id ? 'Enregistrer' : 'Ajouter'}
         </Button>
       </form>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import { remove as removeDiacritics } from 'diacritics';
+import FontAwesome from 'react-fontawesome';
 import developerEditor from '../../../modules/developer-editor.js';
 import { sortByName } from '../../../modules/sorting.js';
 
@@ -78,13 +79,11 @@ export default class DeveloperEditor extends React.Component {
           </FormControl>
         </FormGroup>
         <Button onClick={() => backToList()}>
-          Annuler
+          <FontAwesome name='undo'/> Annuler
         </Button>
         &nbsp;
         <Button type="submit" bsStyle="success">
-          {developer && developer._id
-            ? 'Enregistrer'
-            : 'Ajouter'}
+          <FontAwesome name='floppy-o'/> {developer && developer._id ? 'Enregistrer' : 'Ajouter'}
         </Button>
       </form>
     );

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Panel, Alert, Label, Row, Col, OverlayTrigger, Tooltip, Image, Popover, Table } from 'react-bootstrap';
+import { Panel, Alert, Label, Row, Col, OverlayTrigger, Tooltip, Image, Popover, Table, ListGroup, ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
-import business from 'moment-business';
+import FontAwesome from 'react-fontawesome';
 import HorizontalTimeline from 'react-timeline-view';
+import { getWorkingDays, getRemainingDays } from './working-days-utils';
 
 const getDates = (version) => {
   const unsortedDates = [
@@ -33,6 +34,20 @@ const developerTooltip = developer => (
   <Tooltip id="developerTooltip">{`${developer.firstname} ${developer.lastname}`}</Tooltip>
 );
 
+const getDevelopmentDays = (run, pivotDate) => {
+  let totalDevelopmentDays = 0;
+  const workingDays = getWorkingDays(run.version, pivotDate);
+  for (const developer of run.developers) {
+    const remaingDays = getRemainingDays(run, developer, workingDays, pivotDate);
+    const developmentDays = Math.ceil(remaingDays * (developer.devRatio / 100));
+    totalDevelopmentDays += developmentDays;
+  }
+  return totalDevelopmentDays;
+};
+
+const getTotalDevelopmentDays = run => getDevelopmentDays(run, run.version.startDate);
+const getRemainingDevelopmentDays = run => getDevelopmentDays(run, new Date());
+
 const holidaysPopover = run => (
   <Popover id="holidaysPopover" title="Jours de congés légaux">
     <ul>{run.holidays.map(holiday => (
@@ -41,49 +56,36 @@ const holidaysPopover = run => (
   </Popover>
 );
 
-const getWorkingDays = version => business.weekDays(moment(version.startDate), moment(version.endDate));
-
-const getDevelopmentDays = (run) => {
-  let totalDevelopmentDays = 0;
-  const workingDays = getWorkingDays(run.version);
-  for (const developer of run.developers) {
-    const remaingDays = Math.max(workingDays - developer.holidays, 0);
-    const developmentDays = remaingDays * (developer.devRatio / 100);
-    totalDevelopmentDays += developmentDays;
-  }
-  return totalDevelopmentDays;
-};
-
-const remainingTooltip = () => <Tooltip id="totalTooltip">Jours restants</Tooltip>;
-
 const renderDeveloperDevDayTooltip = (run, developer) => {
-  const workingDays = getWorkingDays(run.version);
-  const remaingDays = Math.max(workingDays - developer.holidays, 0);
+  const workingDays = getWorkingDays(run.version, run.version.startDate);
+  const remaingDays = getRemainingDays(run, developer, workingDays, run.version.startDate);
   return (
     <tr key={developer._id}>
       <th>{`${developer.firstname} ${developer.lastname}`}</th>
-      <th>{remaingDays}</th>
+      <th>{remaingDays} ({workingDays} - {developer.holidays} - {run.holidays.length})</th>
       <th>{developer.devRatio}</th>
-      <th><strong>{remaingDays * (developer.devRatio / 100)}</strong></th>
+      <th><strong>{Math.ceil(remaingDays * (developer.devRatio / 100))}</strong></th>
     </tr>
   );
 };
 
-const developmentDaysTooltip = run => (
-  <Popover id="developmentDaysTooltip" title="Ratio de développement X jours de développement">
+const renderDevDaysPopover = run => <Popover id="developmentDaysTooltip" title="Ratio de développement X jours de développement">
     <Table striped condensed hover responsive>
+      <thead>
       <tr>
         <th>Développeur</th>
         <th>Jours présents</th>
         <th>Ratio Dev</th>
         <th>Jours Dev</th>
       </tr>
+    </thead>
+      <tbody>
       {run.developers.map(developer => (
         renderDeveloperDevDayTooltip(run, developer)
       ))}
+    </tbody>
     </Table>
-  </Popover>
-);
+  </Popover>;
 
 const runHeader = run => (
   <h1><Label bsStyle="primary">{run.team.name}</Label> - <Label bsStyle="primary">{run.version.name}</Label>
@@ -101,7 +103,7 @@ const RunsOverview = ({ runs }) => {
     return <div className="RunsList">
       {runs.map(run => (
         <div className="run-overview" key={run._id}>
-          <Panel header={runHeader(run)} footer=" ">
+          <Panel bsStyle="info" header={runHeader(run)} footer=" ">
             <Row>
               <Col xs={12} className="vcenter">
                 <div className="timeline-wrapper">
@@ -110,33 +112,35 @@ const RunsOverview = ({ runs }) => {
               </Col>
             </Row>
 
-            <Row className="clearfix">
-              <Col xs={12}>
+            <ListGroup className="run-counters">
+              <ListGroupItem>
                 <h2>Nombre de jours <strong>restants</strong> dans la version&nbsp;
-                  <OverlayTrigger placement="bottom" overlay={remainingTooltip()}>
-                    <Label bsStyle="info">??</Label>
-                  </OverlayTrigger>
+                  <Label bsStyle="info">{getRemainingDevelopmentDays(run)}</Label>
                 </h2>
+              </ListGroupItem>
+              <ListGroupItem>
                 <h2>Nombre de jours dans la version&nbsp;
-                  <OverlayTrigger placement="bottom" overlay={developmentDaysTooltip(run)}>
-                     <Label bsStyle="info">{getDevelopmentDays(run)}</Label>
+                  <OverlayTrigger placement="right" overlay={renderDevDaysPopover(run)}>
+                     <Label bsStyle="info">{getTotalDevelopmentDays(run)} <FontAwesome name='info-circle'/></Label>
                   </OverlayTrigger>
                 </h2>
-              </Col>
-            </Row>
-            <Row className="clearfix">
-              <Col xs={12}>
-                <h4>Jours de congés légaux&nbsp;
-                  <OverlayTrigger placement="bottom" trigger={['hover', 'focus']} overlay={holidaysPopover(run)}>
-                    <Label>{run.holidays.length}</Label>
+              </ListGroupItem>
+              <ListGroupItem>
+                <h3>Jours de congés légaux&nbsp;
+                  <OverlayTrigger placement="right" trigger={['hover', 'focus']} overlay={holidaysPopover(run)}>
+                     <Label>{run.holidays.length} <FontAwesome name='info-circle'/></Label>
                   </OverlayTrigger>
-                </h4>
-                <h4>Jours (semaine) dans la version&nbsp;
-                    <Label>{getWorkingDays(run.version)}</Label> jours X <Label>{run.developers.length}</Label> développeurs =
-                    <Label bsStyle="info">{run.developers.length * getWorkingDays(run.version)}</Label>
-                </h4>
-              </Col>
-            </Row>
+                  &nbsp;jours <FontAwesome name='times'/> <Label>{run.developers.length}</Label> développeurs =&nbsp;
+                  <Label bsStyle="info">{run.developers.length * run.holidays.length}</Label>
+               </h3>
+              </ListGroupItem>
+              <ListGroupItem>
+                <h3>Jours (semaine) dans la version&nbsp;
+                    <Label>{getWorkingDays(run.version, run.version.startDate)}</Label> jours <FontAwesome name='times'/> <Label>{run.developers.length}</Label> développeurs =&nbsp;
+                    <Label bsStyle="info">{run.developers.length * getWorkingDays(run.version, run.version.startDate)}</Label>
+                </h3>
+              </ListGroupItem>
+            </ListGroup>
           </Panel>
         </div>
       ))}

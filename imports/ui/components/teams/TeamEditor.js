@@ -3,6 +3,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 import teamEditor from '../../../modules/team-editor.js';
 
 const backToList = () => {
@@ -25,13 +26,11 @@ export default class TeamEditor extends React.Component {
           <FormControl type="text" name="name" defaultValue={team && team.name} placeholder="Nom de l'équipe"/>
         </FormGroup>
         <Button onClick={() => backToList()}>
-          Annuler
+          <FontAwesome name='undo'/> Annuler
         </Button>
         &nbsp;
         <Button type="submit" bsStyle="success">
-          {team && team._id
-            ? 'Enregistrer'
-            : 'Ajouter'}
+          <FontAwesome name='floppy-o'/> {team && team._id ? 'Enregistrer' : 'Ajouter'}
         </Button>
       </form>
     );
