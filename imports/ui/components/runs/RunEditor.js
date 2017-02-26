@@ -3,16 +3,14 @@ import { browserHistory } from 'react-router';
 import { Session } from 'meteor/session';
 import { FormGroup, ControlLabel, FormControl, Button, Table } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
+import { Bert } from 'meteor/themeteorchef:bert';
 import DeveloperAssociation from './DeveloperAssociation.js';
 import runEditor from '../../../modules/run-editor.js';
 import { sortByName } from '../../../modules/sorting.js';
+import AttachDeveloper from './AttachDeveloper.js';
 
 const backToList = () => {
   browserHistory.push('/runs');
-};
-
-const loadDevelopersByTeam = () => {
-  Session.set('run-team-id', $('[name=teamId]').val());
 };
 
 
@@ -21,15 +19,42 @@ export default class RunEditor extends React.Component {
   constructor(props) {
     super(props);
     Session.set('run-team-id', null);
+    this.state = { developers: [] };
+  }
+
+  loadDevelopersByTeam() {
+    Session.set('run-team-id', $('[name=teamId]').val());
   }
 
   componentDidMount() {
     runEditor({ component: this });
-    loadDevelopersByTeam();
+    this.loadDevelopersByTeam();
+    const { developers } = this.props;
+    this.setState({ developers });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ developers: nextProps.developers });
+  }
+
+  addDeveloperToRun(developer) {
+    const developers = this.state.developers.slice();
+    let found = false;
+    for (const currDev of developers) {
+      if (currDev._id === developer._id) {
+        found = true;
+      }
+    }
+    if (found) {
+      Bert.alert('Ce développeur est déjà dans ce run', 'info');
+    } else {
+      developers.push(developer);
+      this.setState({ developers });
+    }
   }
 
   render() {
-    const { run, versions, teams, developers } = this.props;
+    const { run, versions, teams } = this.props;
     return (
       <form ref={form => (this.runEditorForm = form)} onSubmit={event => event.preventDefault()}>
         <FormGroup>
@@ -42,7 +67,7 @@ export default class RunEditor extends React.Component {
         </FormGroup>
         <FormGroup>
           <ControlLabel>Equipe</ControlLabel>
-          <FormControl componentClass="select" name="teamId" defaultValue={run && run.teamId} onChange={() => loadDevelopersByTeam()}>
+          <FormControl componentClass="select" name="teamId" defaultValue={run && run.teamId} onChange={() => this.loadDevelopersByTeam()}>
             {teams.sort(sortByName).map(({ _id, name }) => (
               <option key={_id} value={_id}>{name}</option>
             ))}
@@ -57,9 +82,10 @@ export default class RunEditor extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {developers.sort(sortByName).map(developer => (
+            {this.state.developers.sort(sortByName).map(developer => (
               <DeveloperAssociation key={developer._id} developer={developer} ref={`dev-${developer._id}`}/>
             ))}
+            <AttachDeveloper onAdd={this.addDeveloperToRun.bind(this)} />
           </tbody>
         </Table>
         <Button onClick={() => backToList()}>

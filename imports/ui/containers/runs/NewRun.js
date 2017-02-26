@@ -17,7 +17,7 @@ const composer = ({ params }, onData) => {
   if (teamsSub.ready() && versionsSub.ready() && developersSub.ready()) {
     const teams = Teams.find().fetch();
     const versions = Versions.find().fetch();
-    const developers = Developers.find().fetch();
+    const developers = Developers.find({ teamId }).fetch();
     onData(null, { versions, teams, developers });
   }
 };
