@@ -3,7 +3,7 @@ import { Panel, Alert, Label, Row, Col, OverlayTrigger, Tooltip, Image, Popover,
 import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
 import HorizontalTimeline from 'react-timeline-view';
-import { getWorkingDays, getRemainingDays } from './working-days-utils';
+import { getWorkingDays, getHolidaysAfter, getRemainingDays, getDevelopmentDays } from './working-days-utils';
 
 const getDates = (version) => {
   const unsortedDates = [
@@ -34,17 +34,6 @@ const developerTooltip = developer => (
   <Tooltip id="developerTooltip">{`${developer.firstname} ${developer.lastname}`}</Tooltip>
 );
 
-const getDevelopmentDays = (run, pivotDate) => {
-  let totalDevelopmentDays = 0;
-  const workingDays = getWorkingDays(run.version, pivotDate);
-  for (const developer of run.developers) {
-    const remaingDays = getRemainingDays(run, developer, workingDays, pivotDate);
-    const developmentDays = Math.ceil(remaingDays * (developer.devRatio / 100));
-    totalDevelopmentDays += developmentDays;
-  }
-  return totalDevelopmentDays;
-};
-
 const getTotalDevelopmentDays = run => getDevelopmentDays(run, run.version.startDate);
 const getRemainingDevelopmentDays = run => getDevelopmentDays(run, new Date());
 
@@ -56,32 +45,30 @@ const holidaysPopover = run => (
   </Popover>
 );
 
-const renderDeveloperDevDayTooltip = (run, developer) => {
-  const workingDays = getWorkingDays(run.version, run.version.startDate);
-  const remaingDays = getRemainingDays(run, developer, workingDays, run.version.startDate);
+const renderDeveloperDevDayTooltip = (run, developer, pivotDate) => {
+  const workingDays = getWorkingDays(run.version, pivotDate);
+  const remaingDays = getRemainingDays(run, developer, workingDays, pivotDate);
+  const holidays = getHolidaysAfter(run.holidays, pivotDate);
   return (
     <tr key={developer._id}>
       <th>{`${developer.firstname} ${developer.lastname}`}</th>
-      <th>{remaingDays} ({workingDays} - {developer.holidays} - {run.holidays.length})</th>
-      <th>{developer.devRatio}</th>
+      <th>{remaingDays} ({workingDays} - {developer.holidays} - {holidays.length})</th>
+      <th>{developer.devRatio} %</th>
       <th><strong>{Math.ceil(remaingDays * (developer.devRatio / 100))}</strong></th>
     </tr>
   );
 };
 
-const renderDevDaysPopover = run => <Popover id="developmentDaysTooltip" title="Ratio de développement X jours de développement">
-    <Table striped condensed hover responsive>
+const renderDevDaysPopover = (run, pivotDate) => <Popover id="developmentDaysTooltip" title="Ratio de développement X jours de développement">
+    <Table striped responsive>
       <thead>
       <tr>
-        <th>Développeur</th>
-        <th>Jours présents</th>
-        <th>Ratio Dev</th>
-        <th>Jours Dev</th>
+        <th>Développeur</th><th>Jours ouvrables <br /><small>(tous - congés empl. - congés légaux)</small></th><th>Ratio Dev</th><th>Jours Dev</th>
       </tr>
     </thead>
       <tbody>
       {run.developers.map(developer => (
-        renderDeveloperDevDayTooltip(run, developer)
+        renderDeveloperDevDayTooltip(run, developer, pivotDate)
       ))}
     </tbody>
     </Table>
@@ -115,12 +102,14 @@ const RunsOverview = ({ runs }) => {
             <ListGroup className="run-counters">
               <ListGroupItem>
                 <h2>Nombre de jours <strong>restants</strong> dans la version&nbsp;
-                  <Label bsStyle="info">{getRemainingDevelopmentDays(run)}</Label>
+                  <OverlayTrigger placement="right" overlay={renderDevDaysPopover(run, new Date())}>
+                     <Label bsStyle="info">{getRemainingDevelopmentDays(run)} <FontAwesome name='info-circle'/></Label>
+                  </OverlayTrigger>
                 </h2>
               </ListGroupItem>
               <ListGroupItem>
                 <h2>Nombre de jours dans la version&nbsp;
-                  <OverlayTrigger placement="right" overlay={renderDevDaysPopover(run)}>
+                  <OverlayTrigger placement="right" overlay={renderDevDaysPopover(run, run.version.startDate)}>
                      <Label bsStyle="info">{getTotalDevelopmentDays(run)} <FontAwesome name='info-circle'/></Label>
                   </OverlayTrigger>
                 </h2>

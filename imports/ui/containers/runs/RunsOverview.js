@@ -32,10 +32,11 @@ const composer = (params, onData) => {
       }
       const holidays = candidateHolidays.filter((holiday) => {
         const holidayDate = new Date(holiday.date);
-        return holiday.type === 'public'
-        && holidayDate >= version.startDate
-        && holidayDate <= version.endDate
-        && business.isWeekDay(moment(holidayDate));
+        const validHoliday = holiday.type === 'public'
+          && holidayDate >= version.startDate
+          && holidayDate <= version.freezeDate
+          && business.isWeekDay(moment(holidayDate));
+        return validHoliday;
       });
 
       run.team = team;
