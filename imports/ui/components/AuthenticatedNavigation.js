@@ -28,10 +28,13 @@ const AuthenticatedNavigation = () => (
       <LinkContainer to="/developers">
         <NavItem eventKey={ 5 } href="/documents"><FontAwesome name='user'/> Développeurs</NavItem>
       </LinkContainer>
+      <LinkContainer to="/holidays">
+        <NavItem eventKey={ 6 } href="/holidays"><FontAwesome name='plane'/> Congés</NavItem>
+      </LinkContainer>
     </Nav>
     <Nav pullRight>
-      <NavDropdown eventKey={ 6 } title={ userName() } id="basic-nav-dropdown">
-        <MenuItem eventKey={ 6.1 } onClick={ handleLogout }><FontAwesome name='sign-out'/> Logout</MenuItem>
+      <NavDropdown eventKey={ 7 } title={ userName() } id="basic-nav-dropdown">
+        <MenuItem eventKey={ 7.1 } onClick={ handleLogout }><FontAwesome name='sign-out'/> Logout</MenuItem>
       </NavDropdown>
     </Nav>
   </div>

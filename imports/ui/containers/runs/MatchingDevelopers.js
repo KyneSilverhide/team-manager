@@ -12,7 +12,7 @@ const composer = (params, onData) => {
       $regex: `.*${params.mailFilter}` || '.*',
       $options: 'i',
     } }).fetch();
-    onData(null, { matchingDevelopers, addDeveloper: params.onAdd });
+    onData(null, { matchingDevelopers, onChoose: params.onChoose });
   }
 };
 

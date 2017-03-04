@@ -3,11 +3,16 @@ import { Modal, Button, FormGroup, ControlLabel, FormControl, InputGroup, Alert 
 import FontAwesome from 'react-fontawesome';
 import MatchingDevelopers from '../../containers/runs/MatchingDevelopers.js';
 
-export default class AttachDeveloper extends React.Component {
+export default class SelectDeveloper extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = { showModal: false, mailFilter: '' };
+  }
+
+  componentDidMount() {
+    const { open } = this.props;
+    this.setState({ showModal: open });
   }
 
   close() {
@@ -18,8 +23,8 @@ export default class AttachDeveloper extends React.Component {
     this.setState({ showModal: true });
   }
 
-  addDeveloper(developer) {
-    this.props.onAdd(developer);
+  chooseDeveloper(developer) {
+    this.props.onChoose(developer);
   }
 
   updateMailFilter() {
@@ -28,13 +33,13 @@ export default class AttachDeveloper extends React.Component {
   }
 
   render() {
+    const { label, icon } = this.props;
     return (
-      <tr>
-        <td>
-          <Button type="button" onClick={() => this.open()}><FontAwesome name='user-plus'/> Ajouter développeur(s)</Button>
+      <div>
+          <Button type="button" onClick={() => this.open()}><FontAwesome name={icon}/> {label}</Button>
           <Modal show={this.state.showModal} onHide={() => this.close()}>
             <Modal.Header closeButton>
-              <Modal.Title>Ajouter un développeur</Modal.Title>
+              <Modal.Title>{label}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <FormGroup>
@@ -44,19 +49,21 @@ export default class AttachDeveloper extends React.Component {
                   <FormControl type="text" name="search-mail" onChange={() => this.updateMailFilter()} placeholder="Mail du développeur"/>
                 </InputGroup>
               </FormGroup>
-              <MatchingDevelopers onAdd={this.addDeveloper.bind(this)} mailFilter={this.state.mailFilter}/>
-               { this.state.mailFilter === '' ? <Alert bsStyle="info">Utilisez la recherche pour afficher trouver un développeur</Alert> : ''}
+              <MatchingDevelopers onChoose={this.chooseDeveloper.bind(this)} mailFilter={this.state.mailFilter}/>
+               { this.state.mailFilter === '' ? <Alert bsStyle="info">Utilisez la recherche pour trouver un développeur</Alert> : ''}
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={() => this.close()}><FontAwesome name='check'/> Fermer</Button>
             </Modal.Footer>
           </Modal>
-        </td>
-      </tr>
+      </div>
     );
   }
 }
 
-AttachDeveloper.propTypes = {
-  onAdd: React.PropTypes.func,
+SelectDeveloper.propTypes = {
+  onChoose: React.PropTypes.func,
+  label: React.PropTypes.string,
+  icon: React.PropTypes.string,
+  open: React.PropTypes.bool,
 };

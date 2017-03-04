@@ -2,8 +2,8 @@
 
 import { browserHistory } from 'react-router';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { upsertTeam } from '../api/teams/team.methods.js';
-import './validation.js';
+import { upsertTeam } from '../../../api/teams/team.methods.js';
+import '../../../modules/validation.js';
 
 let component;
 

@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { browserHistory } from 'react-router';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { upsertRun } from '../api/runs/run.methods.js';
-import './validation.js';
+import { upsertRun } from '../../../api/runs/run.methods.js';
+import '../../../modules/validation.js';
 
 let component;
 

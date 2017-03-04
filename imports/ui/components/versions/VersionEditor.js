@@ -2,7 +2,7 @@ import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import { browserHistory } from 'react-router';
-import versionEditor from '../../../modules/version-editor.js';
+import versionEditor from './version-editor.js';
 import dateFaIcons from '../../../modules/date-fa-icons.js';
 
 const backToList = () => {

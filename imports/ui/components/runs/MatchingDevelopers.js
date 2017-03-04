@@ -6,13 +6,13 @@ import { sortByName } from '../../../modules/sorting.js';
 export default class MatchingDevelopers extends React.Component {
 
   render() {
-    const { matchingDevelopers, addDeveloper } = this.props;
+    const { matchingDevelopers, onChoose } = this.props;
     return <ListGroup>
     { matchingDevelopers.sort(sortByName).map(developer => (
       <ListGroupItem key={developer._id} className='clearfix'>
         {developer.firstname} {developer.lastname}
         <span className="pull-right">
-          <button className="btn btn-sm btn-default" onClick={() => addDeveloper(developer)}><FontAwesome name='plus'/> Ajouter</button>
+          <button className="btn btn-sm btn-default" onClick={() => onChoose(developer)}><FontAwesome name='check'/> Choisir</button>
         </span>
       </ListGroupItem>
       ))}
@@ -22,5 +22,5 @@ export default class MatchingDevelopers extends React.Component {
 
 MatchingDevelopers.propTypes = {
   matchingDevelopers: React.PropTypes.array,
-  addDeveloper: React.PropTypes.func,
+  onChoose: React.PropTypes.func,
 };

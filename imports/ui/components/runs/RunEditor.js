@@ -1,13 +1,13 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { Session } from 'meteor/session';
-import { FormGroup, ControlLabel, FormControl, Button, Table } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Table, Alert } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import { Bert } from 'meteor/themeteorchef:bert';
 import DeveloperAssociation from './DeveloperAssociation.js';
-import runEditor from '../../../modules/run-editor.js';
+import runEditor from './run-editor.js';
 import { sortByName } from '../../../modules/sorting.js';
-import AttachDeveloper from './AttachDeveloper.js';
+import SelectDeveloper from '../developers/SelectDeveloper.js';
 
 const backToList = () => {
   browserHistory.push('/runs');
@@ -53,6 +53,10 @@ export default class RunEditor extends React.Component {
     }
   }
 
+  renderDeveloperSelection() {
+    return <SelectDeveloper onChoose={this.addDeveloperToRun.bind(this)} label="Ajouter développeur(s)" icon="user-plus" open={false}/>;
+  }
+
   render() {
     const { run, versions, teams } = this.props;
     return (
@@ -85,7 +89,9 @@ export default class RunEditor extends React.Component {
             {this.state.developers.sort(sortByName).map(developer => (
               <DeveloperAssociation key={developer._id} developer={developer} ref={`dev-${developer._id}`}/>
             ))}
-            <AttachDeveloper onAdd={this.addDeveloperToRun.bind(this)} />
+            <tr>
+              <td>{run ? <Alert bsStyle="info">Il n'est pas possible d'ajouter des développeurs en cours de Run</Alert> : this.renderDeveloperSelection()}</td>
+            </tr>
           </tbody>
         </Table>
         <Button onClick={() => backToList()}>

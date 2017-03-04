@@ -2,8 +2,8 @@
 
 import { browserHistory } from 'react-router';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { upsertVersion } from '../api/versions/version.methods.js';
-import './validation.js';
+import { upsertVersion } from '../../../api/versions/version.methods.js';
+import '../../../modules/validation.js';
 
 let component;
 

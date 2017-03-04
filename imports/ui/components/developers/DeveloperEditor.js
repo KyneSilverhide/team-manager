@@ -3,7 +3,7 @@ import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import { remove as removeDiacritics } from 'diacritics';
 import FontAwesome from 'react-fontawesome';
-import developerEditor from '../../../modules/developer-editor.js';
+import developerEditor from './developer-editor.js';
 import { sortByName } from '../../../modules/sorting.js';
 
 const backToList = () => {
