@@ -81,7 +81,6 @@ export default class RunEditor extends React.Component {
           <thead>
             <tr>
               <th>Développeur</th>
-              <th>Jour(s) de congés</th>
               <th>Ratio de développement</th>
             </tr>
           </thead>

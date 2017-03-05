@@ -6,7 +6,7 @@ import DevelopersList from '../../components/developers/DevelopersList.js';
 import Loading from '../../components/Loading.js';
 
 const composer = (params, onData) => {
-  const limit = Session.get('dev-limit') || 6;
+  const limit = Session.get('dev-limit') || Meteor.settings.public.DEVELOPERS_LIMIT;
   const mailFilter = Session.get('dev-search-mail') || '';
   const subscription = Meteor.subscribe('developers.list', mailFilter, limit);
 

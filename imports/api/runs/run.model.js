@@ -57,10 +57,6 @@ Runs.schema = new SimpleSchema({
     type: Number,
     label: 'Define the percentage of time this developer will work on stories',
   },
-  'developers.$.holidays': {
-    type: Number,
-    label: 'Count the holidays of this developer in this run',
-  },
   ownerId: {
     type: String,
     label: 'The _id of user that created this run',

@@ -28,12 +28,12 @@ export default class DevelopersList extends React.Component {
 
   constructor(props) {
     super(props);
-    Session.set('dev-limit', 6);
+    Session.set('dev-limit', Meteor.settings.public.DEVELOPERS_LIMIT);
     Session.set('dev-search-mail', '');
   }
 
   loadMoreItems() {
-    Session.set('dev-limit', Session.get('dev-limit') + 6);
+    Session.set('dev-limit', Session.get('dev-limit') + Meteor.settings.public.DEVELOPERS_LIMIT);
   }
 
   filterUsersByMail() {
@@ -46,7 +46,7 @@ export default class DevelopersList extends React.Component {
       {developers.sort(sortByName).map(developer => (
         <ListGroupItem key={developer._id} className='clearfix'>
           <h4>{developer.firstname} {developer.lastname}</h4>
-          <img className="dev-avatar" src={`https://jira.xperthis.be/secure/useravatar?ownerId=${developer.jiraAlias}`}/>
+          <img className="dev-avatar" src={`${Meteor.settings.public.JIRA_URL}/secure/useravatar?ownerId=${developer.jiraAlias}`}/>
           <span className="pull-right">
             <button className="btn btn-sm btn-default" onClick={() => handleEdit(developer._id)}><FontAwesome name='pencil'/> Editer</button>
             &nbsp;

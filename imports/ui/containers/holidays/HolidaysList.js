@@ -8,7 +8,8 @@ import Loading from '../../components/Loading.js';
 const composer = ({ params }, onData) => {
   if (params.developerId) {
     const devSub = Meteor.subscribe('developers.view', params.developerId);
-    const holidaySub = Meteor.subscribe('holidays.developers.list', [params.developerId], 50);
+    const limit = Meteor.settings.public.HOLIDAYS_LIMIT;
+    const holidaySub = Meteor.subscribe('holidays.developers.list', [params.developerId], limit);
 
     if (devSub.ready() && holidaySub.ready()) {
       const holidays = Holidays.find().fetch();

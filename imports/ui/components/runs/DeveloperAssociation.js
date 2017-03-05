@@ -5,7 +5,6 @@ export default class DeveloperAssociation extends React.Component {
 
   constructor(props) {
     super(props);
-    this.updateHolidays = this.updateHolidays.bind(this);
     this.updateDevRatio = this.updateDevRatio.bind(this);
   }
 
@@ -14,15 +13,9 @@ export default class DeveloperAssociation extends React.Component {
     this.setState({ _id: developer._id });
     this.setState({ firstname: developer.firstname });
     this.setState({ lastname: developer.lastname });
-    this.setState({ holidays: developer.holidays || 0 });
     this.setState({ devRatio: developer.devRatio || 0 });
     this.setState({ mail: developer.mail });
     this.setState({ jiraAlias: developer.jiraAlias });
-  }
-
-  updateHolidays(event) {
-    const holidays = event.target.value;
-    this.setState({ holidays });
   }
 
   updateDevRatio(event) {
@@ -35,7 +28,6 @@ export default class DeveloperAssociation extends React.Component {
     return (
       <tr key={developer._id} className="developer-row">
         <td>{developer.firstname} {developer.lastname}</td>
-        <td><input type="number" onChange={this.updateHolidays} defaultValue={developer.holidays || 0} name="holidays"/>jour(s)</td>
         <td><input type="number" onChange={this.updateDevRatio} defaultValue={developer.devRatio || 0} name="devRatio"/>%</td>
       </tr>
     );

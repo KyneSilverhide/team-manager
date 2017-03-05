@@ -17,7 +17,6 @@ const buildDevelopers = (componentRefs) => {
         jiraAlias: ref.state.jiraAlias,
         mail: ref.state.mail,
         devRatio: Number(ref.state.devRatio),
-        holidays: Number(ref.state.holidays),
       };
       developers.push(developer);
     }

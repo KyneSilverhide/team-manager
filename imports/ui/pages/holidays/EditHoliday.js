@@ -3,7 +3,7 @@ import HolidayEditor from '../../components/holidays/HolidayEditor.js';
 
 const NewHoliday = ({ developer, holiday }) => (
   <div className="NewTeam">
-    <h4 className="page-header">{`${developer.firstame} ${developer.lastname}`} : Edition d'un congé</h4>
+    <h4 className="page-header">{`${developer.firstname} ${developer.lastname}`} : Edition d'un congé</h4>
     <HolidayEditor developer={developer} holiday={holiday}/>
   </div>
 );

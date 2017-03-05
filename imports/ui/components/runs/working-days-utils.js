@@ -10,7 +10,7 @@ const getValidPivotDate = (version, pivotDate) => {
 
 const getWorkingDays = (version, pivotDate) => {
   const validPivotDate = getValidPivotDate(version, pivotDate);
-  return business.weekDays(moment(validPivotDate), moment(version.freezeDate));
+  return Math.max(0, business.weekDays(moment(validPivotDate), moment(version.freezeDate)));
 };
 
 const getHolidaysAfter = (holidays, startDate) => {
@@ -21,9 +21,25 @@ const getHolidaysAfter = (holidays, startDate) => {
   return filteredHolidays;
 };
 
+const isAfterOrSame = (holiday, pivotDate) => holiday.date.isAfter(pivotDate) || holiday.date.isSame(pivotDate, 'day');
+
+const getDevHolidaysCountAfter = (devHolidays, developer, pivotDate) => {
+  let totalDevHolidays = 0;
+  for (const devHoliday of devHolidays) {
+    if (devHoliday.developerId === developer._id && isAfterOrSame(devHoliday, pivotDate)) {
+      totalDevHolidays += (devHoliday.halfDay ? 0.5 : 1);
+    }
+  }
+  return totalDevHolidays;
+};
+
+const getDevHolidaysAfter = (devHolidays, developer, pivotDate) => devHolidays.filter(holiday =>
+  holiday.developerId === developer._id && isAfterOrSame(holiday, pivotDate));
+
 const getRemainingDays = (run, developer, workingDays, pivotDate) => {
   const holidays = getHolidaysAfter(run.holidays, pivotDate || run.version.startDate);
-  return Math.max(workingDays - developer.holidays - holidays.length, 0);
+  const developerHolidaysCount = getDevHolidaysCountAfter(run.devHolidays, developer, pivotDate);
+  return Math.max(workingDays - developerHolidaysCount - holidays.length, 0);
 };
 
 const getDevelopmentDays = (run, pivotDate) => {
@@ -31,11 +47,12 @@ const getDevelopmentDays = (run, pivotDate) => {
   const workingDays = getWorkingDays(run.version, pivotDate);
   for (const developer of run.developers) {
     const remaingDays = getRemainingDays(run, developer, workingDays, pivotDate);
-    const developmentDays = Math.floor(remaingDays * (developer.devRatio / 100));
+    const developmentDays = (remaingDays * (developer.devRatio / 100).toFixed(2));
     totalDevelopmentDays += developmentDays;
   }
-  return totalDevelopmentDays;
+  return Math.floor(totalDevelopmentDays);
 };
 
 
-export { getWorkingDays, getHolidaysAfter, getRemainingDays, getDevelopmentDays };
+export { getWorkingDays, getHolidaysAfter, getDevHolidaysCountAfter, getDevHolidaysAfter,
+  getRemainingDays, getDevelopmentDays };

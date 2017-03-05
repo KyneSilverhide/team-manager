@@ -16,7 +16,7 @@ const updateMailAndJira = () => {
   if (firstname && lastname) {
     const lowerFirstName = removeDiacritics(firstname.toLowerCase());
     const lowerLastName = removeDiacritics(lastname.toLowerCase());
-    const expectedMail = `${lowerFirstName}.${lowerLastName}@xperthis.be`;
+    const expectedMail = `${lowerFirstName}.${lowerLastName}@${Meteor.settings.public.MAIL_DOMAIN}`;
     const expectedJira = lowerFirstName.substring(0, 2) + lowerLastName.substring(0, 6);
     $('[name="mail"]').val(expectedMail);
     $('[name="jiraAlias"]').val(expectedJira);

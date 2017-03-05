@@ -1,4 +1,4 @@
 import { BrowserPolicy } from 'meteor/browser-policy-common';
 // e.g., BrowserPolicy.content.allowOriginForAll( 's3.amazonaws.com' );
 BrowserPolicy.content.allowFontOrigin('data:');
-BrowserPolicy.content.allowOriginForAll('https://jira.xperthis.be');
+BrowserPolicy.content.allowOriginForAll(Meteor.settings.public.JIRA_URL);

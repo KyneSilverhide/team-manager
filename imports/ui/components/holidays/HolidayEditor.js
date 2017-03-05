@@ -5,11 +5,14 @@ import { browserHistory } from 'react-router';
 import holidayEditor from './holiday-editor.js';
 import dateFaIcons from '../../../modules/date-fa-icons.js';
 
-const backToList = () => {
-  browserHistory.push('/holidays');
-};
 
 export default class HolidayEditor extends React.Component {
+
+  backToList() {
+    const { developer } = this.props;
+    browserHistory.push(`/holidays/${developer._id}`);
+  }
+
   componentDidMount() {
     const { holiday } = this.props;
 
@@ -41,7 +44,7 @@ export default class HolidayEditor extends React.Component {
 
   componentDidUpdate() {
     const { holiday } = this.props;
-    $('[name="startDate"]').doata('DateTimePicker').date(holiday.startDate);
+    $('[name="startDate"]').data('DateTimePicker').date(holiday.startDate);
     $('[name="endDate"]').data('DateTimePicker').date(holiday.endDate);
   }
 
@@ -62,7 +65,7 @@ export default class HolidayEditor extends React.Component {
           <ControlLabel>Demi jour? </ControlLabel>
           <input type="checkbox" name="halfDay" defaultChecked={holiday && holiday.halfDay}/>
         </FormGroup>
-        <Button onClick={() => backToList()}>
+        <Button onClick={this.backToList.bind(this)}>
           <FontAwesome name='undo'/> Annuler
         </Button>
         &nbsp;

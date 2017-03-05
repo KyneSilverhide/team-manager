@@ -1,4 +1,9 @@
 {
-  "public": {},
+  "public": {
+    "JIRA_URL" : "https://jira.xperthis.be",
+    "MAIL_DOMAIN" : "xperthis.be",
+    "HOLIDAYS_LIMIT" : 50,
+    "DEVELOPERS_LIMIT" : 10
+  },
   "private": {}
 }

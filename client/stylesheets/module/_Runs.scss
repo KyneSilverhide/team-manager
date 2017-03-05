@@ -27,7 +27,7 @@ div.run-overview div.vcenter {
   margin-right: 15px;
 }
 
-div#developmentDaysTooltip {
+div#developmentDaysTooltip, div#devHolidaysTooltip {
   width: 600px;
   max-width: 100%
 }
@@ -43,4 +43,10 @@ ul.run-counters h3 {
 ul.run-counters li.list-group-item {
   padding-top: 0px;
   padding-left: 15px;
+}
+
+li.developer-holiday {
+  display: inline-block;
+  padding-right: 8px;
+  list-style-image: none;
 }
