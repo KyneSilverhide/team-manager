@@ -1,5 +1,6 @@
 import React from 'react';
-import 'react-rangeslider/lib/index.css';
+import { Button } from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 
 export default class DeveloperAssociation extends React.Component {
 
@@ -24,11 +25,12 @@ export default class DeveloperAssociation extends React.Component {
   }
 
   render() {
-    const { developer } = this.props;
+    const { developer, onDelete } = this.props;
     return (
       <tr key={developer._id} className="developer-row">
         <td>{developer.firstname} {developer.lastname}</td>
         <td><input type="number" onChange={this.updateDevRatio} defaultValue={developer.devRatio || 0} name="devRatio"/>%</td>
+        <td><Button bsStyle="danger" onClick={() => onDelete(developer)}><FontAwesome name='trash'/> Supprimer</Button></td>
       </tr>
     );
   }
@@ -36,4 +38,5 @@ export default class DeveloperAssociation extends React.Component {
 
 DeveloperAssociation.propTypes = {
   developer: React.PropTypes.object,
+  onDelete: React.PropTypes.func,
 };

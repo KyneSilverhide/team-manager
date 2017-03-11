@@ -7,7 +7,7 @@
 meteor-base@1.0.4             # Packages every Meteor app needs to have
 mobile-experience@1.0.4       # Packages for a great mobile UX
 mongo@1.1.15                   # The database Meteor supports right now
-reactive-var@1.0.11            # Reactive variable for tracker
+reactive-var            # Reactive variable for tracker
 session@1.1.7
 tracker@1.1.2                 # Meteor's client-side reactive programming library
 
@@ -25,7 +25,6 @@ browser-policy@1.1.0
 fourseven:scss
 aldeed:collection2
 alanning:roles
-themeteorchef:bert
 static-html@1.1.11
 mdg:validated-method
 dburles:factory@1.0.0
@@ -34,3 +33,4 @@ shell-server@0.2.2
 fortawesome:fontawesome
 tsega:bootstrap3-datetimepicker
 rzymek:moment-locale-fr
+themeteorchef:bert

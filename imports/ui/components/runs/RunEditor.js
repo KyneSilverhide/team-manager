@@ -1,7 +1,7 @@
+/* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }]*/
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { Session } from 'meteor/session';
-import { FormGroup, ControlLabel, FormControl, Button, Table, Alert } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Table } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import { Bert } from 'meteor/themeteorchef:bert';
 import DeveloperAssociation from './DeveloperAssociation.js';
@@ -18,17 +18,18 @@ export default class RunEditor extends React.Component {
 
   constructor(props) {
     super(props);
-    Session.set('run-team-id', null);
     this.state = { developers: [] };
+    this.setSelectedTeam = this.setSelectedTeam.bind(this);
   }
 
-  loadDevelopersByTeam() {
-    Session.set('run-team-id', $('[name=teamId]').val());
+  setSelectedTeam() {
+    const selectedTeamId = $('[name=teamId]').val();
+    this.props.teamId.set(selectedTeamId);
   }
 
   componentDidMount() {
     runEditor({ component: this });
-    this.loadDevelopersByTeam();
+    this.setSelectedTeam();
     const { developers } = this.props;
     this.setState({ developers });
   }
@@ -53,6 +54,17 @@ export default class RunEditor extends React.Component {
     }
   }
 
+  removeDeveloperFromRun(developer) {
+    const developers = this.state.developers.slice();
+    for (let i = 0; i < developers.length; i++) {
+      const currDev = developers[i];
+      if (currDev._id === developer._id) {
+        developers.splice(i, 1);
+      }
+    }
+    this.setState({ developers });
+  }
+
   renderDeveloperSelection() {
     return <SelectDeveloper onChoose={this.addDeveloperToRun.bind(this)} label="Ajouter développeur(s)" icon="user-plus" open={false}/>;
   }
@@ -71,7 +83,7 @@ export default class RunEditor extends React.Component {
         </FormGroup>
         <FormGroup>
           <ControlLabel>Equipe</ControlLabel>
-          <FormControl componentClass="select" name="teamId" defaultValue={run && run.teamId} onChange={() => this.loadDevelopersByTeam()}>
+          <FormControl componentClass="select" name="teamId" defaultValue={run && run.teamId} onChange={this.setSelectedTeam}>
             {teams.sort(sortByName).map(({ _id, name }) => (
               <option key={_id} value={_id}>{name}</option>
             ))}
@@ -86,10 +98,11 @@ export default class RunEditor extends React.Component {
           </thead>
           <tbody>
             {this.state.developers.sort(sortByName).map(developer => (
-              <DeveloperAssociation key={developer._id} developer={developer} ref={`dev-${developer._id}`}/>
+              <DeveloperAssociation key={developer._id} developer={developer} ref={`dev-${developer._id}`} onDelete={this.removeDeveloperFromRun.bind(this)}/>
             ))}
             <tr>
-              <td>{run ? <Alert bsStyle="info">Il n'est pas possible d'ajouter des développeurs en cours de Run</Alert> : this.renderDeveloperSelection()}</td>
+              <td>{this.renderDeveloperSelection()}</td>
+              {/* <td>{run ? <Alert bsStyle="info">Il n'est pas possible d'ajouter des développeurs en cours de Run</Alert> : this.renderDeveloperSelection()}</td> */}
             </tr>
           </tbody>
         </Table>
@@ -110,4 +123,5 @@ RunEditor.propTypes = {
   versions: React.PropTypes.array,
   teams: React.PropTypes.array,
   developers: React.PropTypes.array,
+  teamId: React.PropTypes.object,
 };

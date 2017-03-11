@@ -78,10 +78,10 @@ const devHolidaysPopover = run => (
   <Popover id="devHolidaysTooltip" title={'Détails des congés de l\'équipe'}>
       <Table striped responsive>
         <thead>
-        <tr>
-          <th>Développeur</th><th>Congés</th>
-        </tr>
-      </thead>
+          <tr>
+            <th>Développeur</th><th>Congés <Label bsStyle="info">Jour</Label>&nbsp;<Label bsStyle="default">Demi-Jour</Label></th>
+          </tr>
+        </thead>
         <tbody>
         {run.developers.map(developer => (
           <DeveloperHolidayRow run={run} developer={developer}/>

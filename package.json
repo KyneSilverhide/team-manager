@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A basic team manager that can assign developers to teams, fetch holidays, and estimate how many working hours are available in a given version",
   "scripts": {
-    "start": "meteor --settings settings-development.json"
+    "start": "meteor --settings settings.json"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -32,7 +32,6 @@
     "react-dom": "^15.3.2",
     "react-fontawesome": "^1.5.0",
     "react-komposer": "^1.13.1",
-    "react-rangeslider": "^2.0.1",
     "react-router": "^3.0.0",
     "react-router-bootstrap": "^0.23.1",
     "react-timeline-view": "^0.1.4",

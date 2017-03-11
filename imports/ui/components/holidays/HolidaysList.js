@@ -13,8 +13,8 @@ const handleEdit = (_id) => {
   browserHistory.push(`/holidays/${_id}/edit`);
 };
 
-const getDaysCount = (holiday) => {
-  const workingDaysInHoliday = business.weekDays(moment(holiday.startDate), moment(holiday.endDate));
+const getWeekDaysCount = (holiday) => {
+  const workingDaysInHoliday = business.weekDays(moment(holiday.startDate), moment(holiday.endDate).add(1, 'day'));
   return holiday.halfDay ? workingDaysInHoliday / 2 : workingDaysInHoliday;
 };
 
@@ -26,7 +26,7 @@ const handleRemove = (_id) => {
       Bert.alert(error.reason, 'danger');
     } else {
       Bert.alert('Congé supprimé', 'success');
-      browserHistory.push('/holidays');
+      browserHistory.push(`/holidays/${this.props.developer._id}`);
     }
   });
 };
@@ -36,7 +36,7 @@ const HolidaysList = ({ developer, holidays }) => {
     return <ListGroup className="HolidaysList">
       {holidays.sort(sortByEndDate).map(holiday => (
         <ListGroupItem key={holiday._id} className='clearfix'>
-          <h2><Label bsStyle="info">{getDaysCount(holiday)} jour(s)</Label></h2> du {moment(holiday.startDate).format('DD/MM/YYYY')} au {moment(holiday.endDate).format('DD/MM/YYYY')}
+          <h2><Label bsStyle="info">{getWeekDaysCount(holiday)} jour(s)</Label></h2> du {moment(holiday.startDate).format('DD/MM/YYYY')} au {moment(holiday.endDate).format('DD/MM/YYYY')}
           <span className="pull-right">
             <button className="btn btn-sm btn-default" onClick={() => handleEdit(holiday._id)}><FontAwesome name='pencil'/> Editer</button>
             &nbsp;

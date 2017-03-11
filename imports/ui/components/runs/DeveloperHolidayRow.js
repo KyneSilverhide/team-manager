@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Label } from 'react-bootstrap';
 import { getDevHolidaysAfter } from './working-days-utils';
 
 export default class DeveloperHolidayRow extends React.Component {
@@ -15,7 +16,9 @@ export default class DeveloperHolidayRow extends React.Component {
       <tr key={developer._id}>
         <td>{`${developer.firstname} ${developer.lastname}`}</td>
         <td>{developerHolidays.map(holiday => (
-            <li className="developer-holiday" key={holiday.date}>{this.prettyDate(holiday.date)}</li>
+            <Label bsStyle={holiday.halfDay ? 'info' : 'default'} className="developer-holiday" key={holiday.date}>
+              {this.prettyDate(holiday.date)}
+            </Label>
         ))}</td>
       </tr>
     );
