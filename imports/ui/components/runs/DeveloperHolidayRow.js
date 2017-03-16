@@ -16,7 +16,7 @@ export default class DeveloperHolidayRow extends React.Component {
       <tr key={developer._id}>
         <td>{`${developer.firstname} ${developer.lastname}`}</td>
         <td>{developerHolidays.map(holiday => (
-            <Label bsStyle={holiday.halfDay ? 'info' : 'default'} className="developer-holiday" key={holiday.date}>
+            <Label bsStyle={holiday.halfDay ? 'default' : 'info'} className="developer-holiday" key={holiday.date}>
               {this.prettyDate(holiday.date)}
             </Label>
         ))}</td>
