@@ -46,7 +46,7 @@ const VersionsList = ({ versions }) => {
               <button className="btn btn-sm btn-danger"><FontAwesome name='trash'/> Supprimer</button>
             </Confirm>
           </span>
-          <div className="timeline-wrapper">
+          <div className="timeline-wrapper hidden-xs">
             <HorizontalTimeline index={2} eventsMinDistance={50} values={ getDates(version) } />
           </div>
         </ListGroupItem>

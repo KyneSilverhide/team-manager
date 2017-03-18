@@ -24,5 +24,5 @@ export default class DeveloperDevDayRow extends React.Component {
 DeveloperDevDayRow.propTypes = {
   run: React.PropTypes.object,
   developer: React.PropTypes.object,
-  pivotDate: React.PropTypes.date,
+  pivotDate: React.PropTypes.instanceOf(Date),
 };
