@@ -1,8 +1,9 @@
 import React from 'react';
-import { Panel, Alert, Label, Row, Col, OverlayTrigger, Tooltip, Image, Popover, Table, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Panel, Alert, Label, Row, Col, OverlayTrigger, Tooltip, Image, Popover, Table, Well } from 'react-bootstrap';
 import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
 import HorizontalTimeline from 'react-timeline-view';
+import { browserHistory } from 'react-router';
 import { getWorkingDays, getDevHolidaysCountAfter, getDevelopmentDays } from './working-days-utils';
 import DeveloperDevDayRow from './DeveloperDevDayRow.js';
 import DeveloperHolidayRow from './DeveloperHolidayRow.js';
@@ -91,15 +92,23 @@ const devHolidaysPopover = run => (
     </Popover>);
 
 const runHeader = run => (
-  <h1><Label bsStyle="primary">{run.team.name}</Label> - <Label bsStyle="primary">{run.version.name}</Label>
-  {run.developers.map(developer => (
-    <div key={developer._id} className="pull-right">
-      <OverlayTrigger placement="bottom" overlay={developerTooltip(run, developer)}>
-        <Image className="dev-avatars-small" src={`${Meteor.settings.public.JIRA_URL}/secure/useravatar?ownerId=${developer.jiraAlias}`} circle />
-      </OverlayTrigger>
-    </div>
-  ))}
-</h1>);
+  <h1>
+    <Label bsStyle="primary">{run.team.name}</Label> - <Label bsStyle="primary">{run.version.name}</Label>
+    <span className="hidden-xs">
+      {run.developers.map(developer => (
+        <div key={developer._id} className="pull-right">
+          <OverlayTrigger placement="bottom" overlay={developerTooltip(run, developer)}>
+            <Image className="dev-avatars-small" src={`${Meteor.settings.public.JIRA_URL}/secure/useravatar?ownerId=${developer.jiraAlias}`} circle />
+          </OverlayTrigger>
+        </div>
+      ))}
+    </span>
+  </h1>
+);
+
+const showHolidaysTimeline = (teamId, versionId) => {
+  browserHistory.push(`/holidays-timeline/${teamId}/${versionId}`);
+};
 
 const RunsOverview = ({ runs }) => {
   if (runs.length > 0) {
@@ -109,52 +118,149 @@ const RunsOverview = ({ runs }) => {
           <Panel bsStyle="info" header={runHeader(run)} footer=" ">
             <Row>
               <Col xs={12} className="vcenter">
-                <div className="timeline-wrapper">
-                  <HorizontalTimeline index={ getDateIndexAtNow(run.version) } eventsMinDistance={50} values={ getDates(run.version) } />
-                </div>
+                <Well>
+                  <div className="timeline-wrapper">
+                    <HorizontalTimeline index={ getDateIndexAtNow(run.version) } eventsMinDistance={50}
+                      styles={{ foreground: '#337ab7', outline: '#dfdfdf', maxSize: '100%' }} values={ getDates(run.version) } />
+                  </div>
+                </Well>
               </Col>
             </Row>
-
-            <ListGroup className="run-counters">
-              <ListGroupItem>
-                <h2>Nombre de jours <strong>restants</strong> dans la version&nbsp;
-                  <OverlayTrigger placement="right" trigger={['hover', 'focus']} overlay={devDaysPopover(run, new Date())}>
-                     <Label bsStyle="info">{getRemainingDevelopmentDays(run)} <FontAwesome name='info-circle'/></Label>
-                  </OverlayTrigger>
-                </h2>
-              </ListGroupItem>
-              <ListGroupItem>
-                <h2>Nombre de jours dans la version&nbsp;
-                  <OverlayTrigger placement="right" trigger={['hover', 'focus']} overlay={devDaysPopover(run, run.version.startDate)}>
-                     <Label bsStyle="info">{getTotalDevelopmentDays(run)} <FontAwesome name='info-circle'/></Label>
-                  </OverlayTrigger>
-                </h2>
-              </ListGroupItem>
-              <ListGroupItem>
-                <h3>Jours de congés légaux&nbsp;
-                  <OverlayTrigger placement="right" trigger={['hover', 'focus']} overlay={holidaysPopover(run)}>
-                     <Label>{run.holidays.length} <FontAwesome name='info-circle'/></Label>
-                  </OverlayTrigger>
-                  &nbsp;jours <FontAwesome name='times'/> <Label>{run.developers.length}</Label> développeurs =&nbsp;
-                  <Label bsStyle="info">{run.developers.length * run.holidays.length}</Label>
-               </h3>
-              </ListGroupItem>
-              <ListGroupItem>
-                <h3>Jours de congés de l'équipe&nbsp;
-                  <OverlayTrigger placement="right" trigger={['hover', 'focus']} overlay={devHolidaysPopover(run)}>
-                     <Label>{getTotalDevHolidays(run)} <FontAwesome name='info-circle'/></Label>
-                  </OverlayTrigger>
-                  &nbsp;jours
-               </h3>
-              </ListGroupItem>
-              <ListGroupItem>
-                <h3>Jours (semaine) dans la version&nbsp;
-                    <Label>{getWorkingDays(run.version, run.version.startDate)}</Label> jours <FontAwesome name='times'/>
-                    <Label>{run.developers.length}</Label> développeurs =&nbsp;
-                    <Label bsStyle="info">{run.developers.length * getWorkingDays(run.version, run.version.startDate)}</Label>
-                </h3>
-              </ListGroupItem>
-            </ListGroup>
+            <div className="run-counters">
+              <Row>
+                <Col xs={12} sm={6}>
+                  <Well>
+                    <Row>
+                      <Col xs={2} className="icon-column">
+                        <FontAwesome className="pull-left box-icon" name="calendar-check-o"/>
+                      </Col>
+                      <Col xs={10} className="vcenter">
+                        <Row>
+                          <span className="box-label">Nombre de jours <strong>restants</strong> dans la version</span>
+                        </Row>
+                        <Row>
+                          <Col xs={4}>
+                            <OverlayTrigger placement="bottom" trigger={['hover', 'focus']} overlay={devDaysPopover(run, new Date())}>
+                               <span>
+                                 <h1 className="box-data">{getRemainingDevelopmentDays(run)}</h1>
+                                 <FontAwesome className="info-tooltip" name="info-circle"/>
+                               </span>
+                            </OverlayTrigger>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Well>
+                </Col>
+                <Col xs={12} sm={6}>
+                  <Well>
+                    <Row>
+                      <Col xs={2} className="icon-column">
+                        <FontAwesome className="pull-left box-icon" name="calendar-check-o"/>
+                      </Col>
+                      <Col xs={10} className="vcenter">
+                        <Row>
+                          <Col xs={12}><span className="box-label">Nombre de jours dans la version</span></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}>
+                            <OverlayTrigger placement="bottom" trigger={['hover', 'focus']} overlay={devDaysPopover(run, run.version.startDate)}>
+                              <span>
+                                <h1 className="box-data">{getTotalDevelopmentDays(run)}</h1>
+                                <FontAwesome className="info-tooltip" name="info-circle"/>
+                              </span>
+                            </OverlayTrigger>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Well>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} sm={6}>
+                  <Well>
+                    <Row>
+                      <Col xs={2} className="icon-column">
+                        <FontAwesome className="pull-left box-icon" name="sun-o"/>
+                      </Col>
+                      <Col xs={10} className="vcenter">
+                        <Row>
+                          <Col xs={12}><span className="box-label">Jours de congés légaux</span></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}>
+                            <OverlayTrigger placement="bottom" trigger={['hover', 'focus']} overlay={holidaysPopover(run)}>
+                               <span>
+                                 <h1 className="box-data">{run.developers.length * run.holidays.length}</h1>
+                                 <FontAwesome className="info-tooltip" name="info-circle"/>
+                               </span>
+                            </OverlayTrigger>
+                          </Col>
+                          <Col xs={8} className="box-details">
+                            {run.holidays.length} <span className="xs">jours</span><br />
+                            {run.developers.length} <span className="xs">développeurs</span>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Well>
+                </Col>
+                <Col xs={12} sm={6}>
+                  <Well>
+                    <Row>
+                      <Col xs={2} className="icon-column">
+                        <FontAwesome className="pull-left box-icon" name="sun-o"/>
+                      </Col>
+                      <Col xs={10} className="vcenter">
+                        <Row>
+                          <Col xs={12}><span className="box-label">Jours de congés de l'équipe</span>
+                            {/* <button className="btn btn-sm btn-default" onClick={() => showHolidaysTimeline(run.version._id, run.team._id)}><FontAwesome name='pencil'/> Analyse des congés</button> */}
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}>
+                            <OverlayTrigger placement="left" trigger={['hover', 'focus']} overlay={devHolidaysPopover(run)}>
+                               <span>
+                                 <h1 className="box-data">{getTotalDevHolidays(run)}</h1>
+                                 <FontAwesome className="info-tooltip" name="info-circle"/>
+                               </span>
+                            </OverlayTrigger>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Well>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} sm={6}>
+                  <Well>
+                    <Row>
+                      <Col xs={2} className="icon-column">
+                        <FontAwesome className="pull-left box-icon" name="calendar"/>
+                      </Col>
+                      <Col xs={10} className="vcenter">
+                        <Row>
+                          <Col xs={12}><span className="box-label">Jours (semaine) dans la version</span></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}>
+                            <h1 className="box-data">
+                              {run.developers.length * getWorkingDays(run.version, run.version.startDate)}
+                            </h1>
+                          </Col>
+                          <Col xs={8} className="box-details">
+                            {getWorkingDays(run.version, run.version.startDate)} <span className="xs">jours</span><br />
+                            {run.developers.length} <span className="xs">développeurs</span>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Well>
+                </Col>
+              </Row>
+            </div>
           </Panel>
         </div>
       ))}

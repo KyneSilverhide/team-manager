@@ -49,7 +49,7 @@ const VersionsList = ({ versions }) => {
           <div className="timeline-wrapper">
             <HorizontalTimeline index={2} eventsMinDistance={50} values={ getDates(version) } />
           </div>
-          </ListGroupItem>
+        </ListGroupItem>
       ))}
     </ListGroup>;
   }

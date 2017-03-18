@@ -47,7 +47,7 @@ const HolidaysList = ({ developer, holidays }) => {
               <button className="btn btn-sm btn-danger"><FontAwesome name='trash'/> Supprimer</button>
             </Confirm>
           </span>
-          </ListGroupItem>
+        </ListGroupItem>
       ))}
     </ListGroup>;
   }

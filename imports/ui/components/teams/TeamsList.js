@@ -28,6 +28,7 @@ const TeamsList = ({ teams }) => (teams.length > 0
         <ListGroupItem key={_id} className='clearfix'>
           {name}
           <span className="pull-right">
+            &nbsp;
             <button className="btn btn-sm btn-default" onClick={() => handleEdit(_id)}><FontAwesome name='pencil'/> Editer</button>
             &nbsp;
             <Confirm
