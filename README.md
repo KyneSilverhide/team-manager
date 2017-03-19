@@ -39,6 +39,6 @@ meteor npm start
 * Go back to the main page to see the dashboard
 
 # Future features ?
-[ ] Translation(s)
-[ ] Optional JIRA relationship
-[ ] Improved mobile support
+- [ ] Translation(s)
+- [ ] Optional JIRA relationship
+- [ ] Improved mobile support
