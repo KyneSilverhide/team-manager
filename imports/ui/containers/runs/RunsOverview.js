@@ -71,10 +71,13 @@ const composer = (params, onData) => {
     if (runs.length === 0) {
       onData(null, { runs });
     } else {
+      const developerIds = [];
       for (const run of runs) {
-        const developerIds = run.developers.map(developer => developer._id);
-        const devHolidaysSubscription = Meteor.subscribe('holidays.developers.list', developerIds, Meteor.settings.public.HOLIDAYS_LIMIT);
-        if (devHolidaysSubscription.ready()) {
+        run.developers.map(developer => developer._id).forEach(developerId => developerIds.push(developerId));
+      }
+      const devHolidaysSubscription = Meteor.subscribe('holidays.developers.list', developerIds, Meteor.settings.public.HOLIDAYS_LIMIT);
+      if (devHolidaysSubscription.ready()) {
+        for (const run of runs) {
           const team = Teams.findOne({ _id: run.teamId });
           const version = Versions.findOne({ _id: run.versionId });
           const developerHolidays = Holidays.find().fetch();
@@ -83,9 +86,9 @@ const composer = (params, onData) => {
           run.team = team;
           run.holidays = fetchPublicWeekDaysHolidaysInVersion(version);
           run.devHolidays = filterDeveloperHolidaysInVersion(version, developerHolidays);
-
-          onData(null, { runs });
         }
+
+        onData(null, { runs });
       }
     }
   }

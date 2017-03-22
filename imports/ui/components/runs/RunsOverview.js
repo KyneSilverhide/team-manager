@@ -94,7 +94,7 @@ export default class RunsOverview extends React.Component {
               <Col xs={12} xsHidden={true}>
                 <Well>
                   <div className="hidden-xs">
-                    <HolidaysTimeline run={run}/>
+                    <HolidaysTimeline key={run._id} run={run}/>
                   </div>
                 </Well>
               </Col>

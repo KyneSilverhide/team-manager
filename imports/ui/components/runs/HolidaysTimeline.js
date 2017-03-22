@@ -17,6 +17,10 @@ export default class HolidaysTimeline extends React.Component {
         title: `${developer.firstname} ${developer.lastname}`,
       });
     }
+    groups.push({
+      id: -1,
+      title: 'Total',
+    });
     return groups;
   }
 
@@ -47,7 +51,7 @@ export default class HolidaysTimeline extends React.Component {
       id,
       group: devHoliday.developerId,
       title: devHoliday.halfDay ? '0.5' : '1',
-      start_time: moment(devHoliday.date),
+      start_time: devHoliday.date,
       end_time: moment(devHoliday.date).endOf('day'),
       className: devHoliday.halfDay ? 'halfday' : 'fullday',
     };
