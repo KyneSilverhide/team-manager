@@ -94,16 +94,58 @@ div.react-calendar-timeline .rct-header .rct-label-group {
   background-color: #337ab7;
 }
 
-.react-calendar-timeline .rct-items  {
+.RunsList .react-calendar-timeline .rct-today {
+  z-index: 2;
+  background-color: #337ab7;
+}
+
+.RunsList .react-calendar-timeline .rct-items  {
+
+  .rct-item {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    border-left: 1px solid #bbb;
+  }
+
+  .rct-item.version {
+    font-size: 1em;
+    background-color: #f4f8ff;
+    color: #333;
+  }
+
+  .rct-item.development {
+    background-color: #f4f8ff;
+    color: #333;
+  }
+
+  .rct-item.total-week {
+    font-size: 1em;
+    background-color: #f4f8ff;
+    color: #333;
+  }
+
   .rct-item.fullday {
-    background-color: #46b8da;
+    background-color: #E7E6D9;
+    color: #333;
   }
 
   .rct-item.halfday {
-    background-color: #666666;
+    background-color: #E7E6D9;
+    color: #333;
+  }
+
+  .rct-item.holiday {
+    background-color: #E7E6D9;
+    color: #333;
   }
 
   .rct-item.freeze {
-    background-color: #666666;
+    font-size: 1em;
+    background-color: #f4f8ff;
+    color: #333;
   }
+}
+
+.rct-item-content {
+    font-size: 0.85em;
 }
