@@ -11,7 +11,7 @@ const handleRecovery = () => {
     if (error) {
       Bert.alert(error.reason, 'warning');
     } else {
-      Bert.alert('Check your inbox for a reset link!', 'success');
+      Bert.alert('Un mail de récupération de mot de passe a été envoyé', 'success');
     }
   });
 };
@@ -26,8 +26,8 @@ const validate = () => {
     },
     messages: {
       emailAddress: {
-        required: 'Need an email address here.',
-        email: 'Is this email address legit?',
+        required: 'Veuillez entrer votre email',
+        email: 'Cet email est invalide',
       },
     },
     submitHandler() { handleRecovery(); },

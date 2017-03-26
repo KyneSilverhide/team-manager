@@ -9,8 +9,9 @@ const handleLogout = () => Meteor.logout(() => browserHistory.push('/login'));
 
 const userName = () => {
   const user = Meteor.user();
-  const name = user && user.profile ? user.profile.name : '';
-  return user ? `${name.first} ${name.last}` : '';
+  console.log(user);
+  const mail = user && user.emails.length > 0 ? user.emails[0].address : 'Utilisateur inconnu';
+  return mail;
 };
 
 const AuthenticatedNavigation = () => (
@@ -34,7 +35,7 @@ const AuthenticatedNavigation = () => (
     </Nav>
     <Nav pullRight>
       <NavDropdown eventKey={ 7 } title={ userName() } id="basic-nav-dropdown">
-        <MenuItem eventKey={ 7.1 } onClick={ handleLogout }><FontAwesome name='sign-out'/> Logout</MenuItem>
+        <MenuItem eventKey={ 7.1 } onClick={ handleLogout }><FontAwesome name='sign-out'/> Déconnexion</MenuItem>
       </NavDropdown>
     </Nav>
   </div>

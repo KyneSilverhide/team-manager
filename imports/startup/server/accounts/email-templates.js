@@ -1,7 +1,7 @@
 import { Accounts } from 'meteor/accounts-base';
 
-const name = 'Application Name';
-const email = '<support@application.com>';
+const name = 'Xperthis Team-Manager';
+const email = '<aurelien.lansmanne@xperthis.be>';
 const from = `${name} ${email}`;
 const emailTemplates = Accounts.emailTemplates;
 
@@ -10,16 +10,14 @@ emailTemplates.from = from;
 
 emailTemplates.resetPassword = {
   subject() {
-    return `[${name}] Reset Your Password`;
+    return `[${name}] Récupération du mot de passe`;
   },
   text(user, url) {
     const userEmail = user.emails[0].address;
     const urlWithoutHash = url.replace('#/', '');
 
-    return `A password reset has been requested for the account related to this
-    address (${userEmail}). To reset the password, visit the following link:
-    \n\n${urlWithoutHash}\n\n If you did not request this reset, please ignore
-    this email. If you feel something is wrong, please contact our support team:
-    ${email}.`;
+    return `Une demande de réinitialisation du mot de passe a été reçue pour cet email (${userEmail}). Pour changer de mot de passe, cliquez sur l'URL suivante:
+    \n\n${urlWithoutHash}\n\n Si vous n'êtes pas l'auteur de cette demande, ignorez cet email.
+    Si vous avez l'impression que quelquechose d'anormal s'est produit, contactez le responsable de la plateforme: ${email}.`;
   },
 };

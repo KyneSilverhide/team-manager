@@ -5,5 +5,7 @@
     "HOLIDAYS_LIMIT" : 50,
     "DEVELOPERS_LIMIT" : 10
   },
-  "private": {}
+  "private": {
+    "ADMIN_URL" : "aurelien.lansmanne@xperthis.be"
+  }
 }

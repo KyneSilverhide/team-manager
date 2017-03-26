@@ -8,7 +8,7 @@ const PublicNavigation = () => (
       <NavItem eventKey={ 1 } href="/signup">S&#39;enregistrer</NavItem>
     </LinkContainer>
     <LinkContainer to="login">
-      <NavItem eventKey={ 2 } href="/login">Log In</NavItem>
+      <NavItem eventKey={ 2 } href="/login">Connexion</NavItem>
     </LinkContainer>
   </Nav>
 );

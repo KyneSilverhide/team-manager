@@ -172,10 +172,9 @@ export default class HolidaysTimeline extends React.Component {
   }
 
   render() {
-    const { run } = this.props;
     return <Timeline groups={this.getGroups()} items={this.getDateItems()} canMove={false} canChangeGroup={false} canResize={false}
               itemHeightRatio={1} defaultTimeStart={moment().startOf('week')}
-              defaultTimeEnd={moment(run.version.startDate).add(2, 'week')}/>;
+              defaultTimeEnd={moment().add(2, 'week')}/>;
   }
 }
 
